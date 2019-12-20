@@ -8,7 +8,7 @@ class FilmList extends Component{
   componentDidMount(){
     this.props.dispatch({type: `GET_FILM`});
   }
-  
+
   render(){
     return(
       <>
@@ -20,7 +20,7 @@ class FilmList extends Component{
             <div className="double-row">
               <img src={film.poster} alt={film.title} />
             </div>
-            <div className="col">{film.title}</div>
+            <div className="col film-title">{film.title}</div>
             <div className="col">{film.description}</div>
           </div>
         )}
