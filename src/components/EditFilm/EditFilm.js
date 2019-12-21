@@ -13,8 +13,8 @@ class EditFilm extends Component{
   }
 
   componentDidMount(){
-    this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id}); // DOES NOT RUN
-    this.setState(this.props.reduxState[0]);
+    this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id});
+    this.setState(this.props.reduxState[0]); // DOES NOT RUN
   }
 
   // Set state to input value
@@ -34,6 +34,8 @@ class EditFilm extends Component{
   render(){
     return(
       <div className="main-edit-div">
+        {JSON.stringify(this.props.reduxState)}
+        {JSON.stringify(this.state)}
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
             <input type="text" onChange={(event)=>this.handleChange(event, 'title')} value={this.state.title} />

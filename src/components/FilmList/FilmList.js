@@ -25,6 +25,7 @@ class FilmList extends Component{
               </Link>
             </div>
             <div className="col film-title">{film.title}</div>
+            <div className="col">{film.name}</div>
             <div className="col">{film.description}</div>
           </div>
         )}
