@@ -34,7 +34,7 @@ class ThisFilm extends Component{
             <div>{film.name}</div>
             <div>{film.description}</div>
             <button onClick={this.handleClickBack}>BACK</button>
-            <Link to={"/edit/"+film.id}>
+            <Link to={"/edit/"+film.movie_id}>
               <button>EDIT</button>
             </Link>
           </div>

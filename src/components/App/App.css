@@ -12,3 +12,23 @@
 .film-title {
   font-weight: bold;
 }
+
+.main-list-div {
+  display: flex;
+  flex-direction: row;
+  height: 400px;
+}
+
+.row {
+  display: flex;
+  /* width: 100%; */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  text-align: center;
+  align-items: center;
+}

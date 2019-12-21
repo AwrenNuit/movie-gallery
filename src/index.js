@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App.js';
-import axios from 'axios';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
@@ -10,99 +9,30 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-import {takeEvery, put} from 'redux-saga/effects';
+import {takeEvery} from 'redux-saga/effects';
+// Import sagas
+import deleteFilmSaga from './redux/sagas/deleteFilmSaga';
+import editFilmSaga from './redux/sagas/editFilmSaga';
+import getFilmSaga from './redux/sagas/getFilmSaga';
+import getGenreSaga from './redux/sagas/getGenreSaga';
+import getThisFilmSaga from './redux/sagas/getThisFilmSaga';
+// Import reducers
+import filmReducer from './redux/reducers/filmReducer';
+import genreReducer from './redux/reducers/genreReducer';
+import thisFilmReducer from './redux/reducers/thisFilmReducer';
 
 
 // Create the watcherSaga generator function
 function* watcherSaga() {
+    yield takeEvery(`DELETE_FILM`, deleteFilmSaga);
     yield takeEvery(`EDIT_FILM`, editFilmSaga);
     yield takeEvery(`GET_FILM`, getFilmSaga);
     yield takeEvery(`GET_GENRE`, getGenreSaga);
     yield takeEvery(`GET_THIS_FILM`, getThisFilmSaga);
 }
 
-// Saga to EDIT selected film
-function* editFilmSaga(action){
-    try{
-        console.log('in PUT saga with:', action.payload);
-        yield axios.put(`/film/${action.payload.id}`, action.payload);
-        yield put({type: `GET_THIS_FILM`, payload: action.payload.id});
-    }
-    catch(error){
-        console.log('error in PUT film:', error);
-    }
-}
-
-// Saga to GET all films
-function* getFilmSaga(){
-    try{
-        console.log('in GET film saga');
-        const getResponse = yield axios.get(`/film`);
-        yield put({type: `SET_FILM`, payload: getResponse.data});
-    }
-    catch(error){
-        console.log('error in GET film:', error);
-    }
-}
-
-// Saga to GET all genres
-function* getGenreSaga(){
-    try{
-        console.log('in GET genre saga');
-        const getResponse = yield axios.get(`/film/genre`);
-        yield put({type: `SET_GENRE`, payload: getResponse.data});
-    }
-    catch(error){
-        console.log('error in GET genre:', error);
-    }
-}
-
-// Saga to GET the selected film and genre
-function* getThisFilmSaga(action){
-    try{
-        console.log('in GET this film saga:', action.payload);
-        const getResponse = yield axios.get(`/film/this/${action.payload}`);
-        yield put({type: `SET_THIS_FILM`, payload: getResponse.data});
-    }
-    catch(error){
-        console.log('error in GET this film:', error);
-    }
-}
-
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
-
-// Store all films
-const filmReducer = (state = [], action) => {
-    console.log('in film reducer');
-    switch (action.type) {
-        case 'SET_FILM':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-// Store all genres
-const genreReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_GENRE':
-            return action.payload;
-        default:
-            return state;
-    }
-}
-
-// Store the selected film
-const thisFilmReducer = (state = [], action) => {
-    console.log('in THIS film reducer');
-    switch (action.type) {
-        case 'SET_THIS_FILM':
-            return action.payload;
-        default:
-            return state;
-    }
-}
 
 // Create one store that all components can use
 const storeInstance = createStore(

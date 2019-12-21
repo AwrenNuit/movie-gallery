@@ -2,6 +2,23 @@ const express = require(`express`);
 const router = express.Router();
 const pool = require(`../modules/pool`);
 
+// DELETE selected film
+router.delete(`/delete/:id`, (req, res)=>{
+  console.log('in `/delete/id DELETE with:', req.params.id);
+  let id = [req.params.id];
+  let SQLquery = `DELETE FROM movies
+                  USING movie_genre
+                  WHERE movies.id = movie_genre.movie_id AND movies.id = $1;`;
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.send(200);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /delete/id DELETE film -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET all films
 router.get(`/`, (req, res)=>{
   console.log('in / GET');
