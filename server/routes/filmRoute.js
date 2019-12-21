@@ -56,7 +56,7 @@ router.put(`/:id`, (req, res)=>{
   let SQLquery = `UPDATE movies SET title = $2, poster = $3, description = $4 WHERE id = $1;`; //INSERT INTO movie_genre (movie_id, genre_id) VALUES($1, $2);
   pool.query(SQLquery, id)
   .then(result=>{
-    res.send(result.rows);
+    res.send(200);
   })
   .catch(error=>{
     console.log('ERROR IN /id PUT film -------------------------------->', error);
