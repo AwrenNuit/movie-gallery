@@ -1,15 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class ThisFilm extends Component{
 
   componentDidMount(){
-    this.props.dispatch({type: `GET_GENRE`});
-  }
-
-  // Push history to /edit
-  handleClickEdit = () => {
-    this.props.history.push(`/edit`);
+    this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id})
   }
 
   // Clear reducer selected film with dispatch
@@ -38,7 +34,9 @@ class ThisFilm extends Component{
             <div>{film.name}</div>
             <div>{film.description}</div>
             <button onClick={this.handleClickBack}>BACK</button>
-            <button onClick={this.handleClickEdit}>EDIT</button>
+            <Link to={"/edit/"+film.id}>
+              <button>EDIT</button>
+            </Link>
           </div>
         )}
       </div>

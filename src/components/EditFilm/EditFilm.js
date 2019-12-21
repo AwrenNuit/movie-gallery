@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 class EditFilm extends Component{
 
@@ -12,7 +13,8 @@ class EditFilm extends Component{
   }
 
   componentDidMount(){
-    this.setState(this.props.reduxState[0])
+    this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id}); // DOES NOT RUN
+    this.setState(this.props.reduxState[0]);
   }
 
   // Set state to input value
@@ -21,16 +23,6 @@ class EditFilm extends Component{
       ...this.state,
       [propName]: event.target.value
     })
-  }
-
-  // Return to film details page
-  goBack = () => {
-    this.props.history.push(`/details`);
-  }
-
-  // Return to film details page
-  handleClickCancel = () => {
-    this.goBack();
   }
 
   // Dispatch state to Saga, return to details page
@@ -48,7 +40,9 @@ class EditFilm extends Component{
             <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} />
             <input type="text" onChange={(event)=>this.handleChange(event, 'poster')} value={this.state.poster} />
             <textarea rows="6" cols="30" onChange={(event)=>this.handleChange(event, 'description')} value={this.state.description}></textarea>
-            <button onClick={this.handleClickCancel}>CANCEL</button>
+            <Link to={"/details/"+film.id}>
+              <button>CANCEL</button>
+            </Link>
             <button onClick={this.handleClickSave}>SAVE</button>
           </div>
         )}
