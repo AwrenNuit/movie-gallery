@@ -19,6 +19,7 @@ CREATE TABLE "movie_genre" (
 );
 
 
+
 -- CREATE JUNCTION TABLE
 -- You will need to create the junction table that stores the relationships between "movies" and "genres"
 -- This table will need to be populated with some data as well (INSERTS)
@@ -64,4 +65,4 @@ VALUES
 ('Superhero');
 
 -- insert into junction table
-INSERT INTO "movie_genre"("movie_id", "genre_id") VALUES(1,11), (2,2), (3,13), (4,2), (5,6), (6,8), (7,1), (8,6), (9,2), (10,12), (11,11), (12,6), (13,5), (14,4);
+INSERT INTO "movie_genre"("movie_id", "genre_id") VALUES(1,11), (2,10), (3,13), (4,2), (5,6), (6,8), (7,1), (8,6), (9,2), (10,12), (11,11), (12,6), (13,5), (14,4);

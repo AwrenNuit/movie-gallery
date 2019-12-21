@@ -13,13 +13,14 @@ import createSagaMiddleware from 'redux-saga';
 import {takeEvery, put} from 'redux-saga/effects';
 
 
-// Create the rootSaga generator function
-function* rootSaga() {
+// Create the watcherSaga generator function
+function* watcherSaga() {
     yield takeEvery(`GET_FILM`, getFilmSaga);
     yield takeEvery(`GET_GENRE`, getGenreSaga);
     yield takeEvery(`GET_THIS_FILM`, getThisFilmSaga);
 }
 
+// Saga to GET all films
 function* getFilmSaga(){
     try{
         console.log('in GET film saga');
@@ -31,6 +32,7 @@ function* getFilmSaga(){
     }
 }
 
+// Saga to GET all genres
 function* getGenreSaga(){
     try{
         console.log('in GET genre saga');
@@ -42,6 +44,7 @@ function* getGenreSaga(){
     }
 }
 
+// Saga to GET the selected film and genre
 function* getThisFilmSaga(action){
     try{
         console.log('in GET this film saga:', action.payload);
@@ -56,7 +59,7 @@ function* getThisFilmSaga(action){
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
-// Used to store movies returned from the server
+// Store all films
 const filmReducer = (state = [], action) => {
     console.log('in film reducer');
     switch (action.type) {
@@ -67,7 +70,7 @@ const filmReducer = (state = [], action) => {
     }
 }
 
-// Used to store the movie genres
+// Store all genres
 const genreReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_GENRE':
@@ -77,7 +80,7 @@ const genreReducer = (state = [], action) => {
     }
 }
 
-// Stores ONE movie that's clicked on
+// Store the selected film
 const thisFilmReducer = (state = [], action) => {
     console.log('in THIS film reducer');
     switch (action.type) {
@@ -100,7 +103,7 @@ const storeInstance = createStore(
 );
 
 // Pass rootSaga into our sagaMiddleware
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(watcherSaga);
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, 
     document.getElementById('root'));

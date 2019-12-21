@@ -6,7 +6,7 @@ import FilmList from '../FilmList/FilmList';
 import ThisFilm from '../ThisFilm/ThisFilm';
 
 class App extends Component {
-  // Renders the entire app on the DOM
+
   render() {
     return (
       <div className="App">

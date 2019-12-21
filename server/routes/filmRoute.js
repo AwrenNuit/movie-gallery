@@ -2,6 +2,7 @@ const express = require(`express`);
 const router = express.Router();
 const pool = require(`../modules/pool`);
 
+// GET all films
 router.get(`/`, (req, res)=>{
   console.log('in GET');
   let SQLquery = `SELECT * FROM movies;`;
@@ -15,6 +16,7 @@ router.get(`/`, (req, res)=>{
   });
 });
 
+// GET all genres
 router.get(`/genre`, (req, res)=>{
   console.log('in GET');
   let SQLquery = `SELECT * FROM genres;`;
@@ -28,6 +30,7 @@ router.get(`/genre`, (req, res)=>{
   });
 });
 
+// GET selected film and genre
 router.get(`/this/:id`, (req, res)=>{
   console.log('in GET');
   let id = [req.params.id];

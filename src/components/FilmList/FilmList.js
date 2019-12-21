@@ -9,8 +9,19 @@ class FilmList extends Component{
     this.props.dispatch({type: `GET_FILM`});
   }
 
+  // Dispatch selected film to Saga
+  dispatchSelectedFilm = (id) => {
+    this.props.dispatch({type: `GET_THIS_FILM`, payload: id});
+  }
+
+  // Dispatch to Saga and push history to /details
   handleClick = (id) => {
-    this.props.dispatch({type: `GET_THIS_FILM`, payload: id})
+    this.dispatchSelectedFilm(id);
+    this.pushHistory();
+  }
+
+  // Push history to /details
+  pushHistory = () => {
     this.props.history.push(`/details`);
   }
 
