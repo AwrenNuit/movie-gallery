@@ -43,7 +43,8 @@ class FilmList extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.filmReducer
+  reduxState: reduxState.filmReducer,
+  this: reduxState.thisFilmReducer
 });
 
 export default connect(putReduxStateOnProps)(FilmList);

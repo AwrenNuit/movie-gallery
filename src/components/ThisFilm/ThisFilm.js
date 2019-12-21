@@ -7,6 +7,27 @@ class ThisFilm extends Component{
     this.props.dispatch({type: `GET_GENRE`});
   }
 
+  // Edit this film
+  handleClickEdit = () => {
+
+  }
+
+  // Clear reducer selected film with dispatch
+  emptyReducer = () => {
+    this.props.dispatch({type: `SET_THIS_FILM`, payload: []});
+  }
+
+  // Return to film list page
+  goBack = () => {
+    this.props.history.push(`/`);
+  }
+
+  // Clear reducer for selected film, return to film list
+  handleClickBack = () => {
+    this.emptyReducer();
+    this.goBack();
+  }
+
   render(){
     return(
       <div className="main-single-film-div">
@@ -16,6 +37,8 @@ class ThisFilm extends Component{
             <div className="film-title">{film.title}</div>
             <div>{film.name}</div>
             <div>{film.description}</div>
+            <button onClick={this.handleClickEdit}>EDIT</button>
+            <button onClick={this.handleClickBack}>BACK</button>
           </div>
         )}
       </div>
