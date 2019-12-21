@@ -15,9 +15,23 @@ import {takeEvery, put} from 'redux-saga/effects';
 
 // Create the watcherSaga generator function
 function* watcherSaga() {
+    yield takeEvery(`EDIT_FILM`, editFilmSaga);
     yield takeEvery(`GET_FILM`, getFilmSaga);
     yield takeEvery(`GET_GENRE`, getGenreSaga);
     yield takeEvery(`GET_THIS_FILM`, getThisFilmSaga);
+}
+
+// Saga to EDIT selected film
+function* editFilmSaga(action){
+    try{
+        console.log('in PUT saga with:', action.payload);
+        yield axios.put(`/film/${action.payload.id}`, action.payload);
+        yield put({type: `GET_FILM`});
+        yield put({type: `GET_GENRE`});
+    }
+    catch(error){
+        console.log('error in PUT film:', error);
+    }
 }
 
 // Saga to GET all films

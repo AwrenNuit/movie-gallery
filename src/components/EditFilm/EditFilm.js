@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 class EditFilm extends Component{
 
   state = {
+    id: '',
     title: '',
     poster: '',
     description: '',
@@ -23,9 +24,19 @@ class EditFilm extends Component{
   }
 
   // Return to film details page
-  handleClickCancel = () => {
+  goBack = () => {
     this.props.history.push(`/details`);
+  }
 
+  // Return to film details page
+  handleClickCancel = () => {
+    this.goBack();
+  }
+
+  // Dispatch state to Saga, return to details page
+  handleClickSave = () => {
+    this.props.dispatch({type: `EDIT_FILM`, payload: this.state});
+    this.goBack();
   }
 
   render(){
@@ -38,7 +49,7 @@ class EditFilm extends Component{
             <input type="text" onChange={(event)=>this.handleChange(event, 'poster')} value={this.state.poster} />
             <textarea rows="6" cols="30" onChange={(event)=>this.handleChange(event, 'description')} value={this.state.description}></textarea>
             <button onClick={this.handleClickCancel}>CANCEL</button>
-            <button onClick={this.handleClickBack}>SAVE</button>
+            <button onClick={this.handleClickSave}>SAVE</button>
           </div>
         )}
       </div>
