@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {hashRouter as Router, Route, Link} from 'react-router-dom';
+// import {hashRouter as Router, Route, Link} from 'react-router-dom';
 
 
 class FilmList extends Component{
@@ -9,16 +9,18 @@ class FilmList extends Component{
     this.props.dispatch({type: `GET_FILM`});
   }
 
+  handleClick = (id) => {
+    this.props.dispatch({type: `GET_THIS_FILM`, payload: id})
+    this.props.history.push(`/details`);
+  }
+
   render(){
     return(
       <>
-        {/* <Router>        
-          <Route path="/details" component={ThisFilm} />
-        </Router> */}
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
             <div className="double-row">
-              <img src={film.poster} alt={film.title} />
+              <img onClick={()=>this.handleClick(film.id)} src={film.poster} alt={film.title} />
             </div>
             <div className="col film-title">{film.title}</div>
             <div className="col">{film.description}</div>

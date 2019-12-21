@@ -16,6 +16,8 @@ import {takeEvery, put} from 'redux-saga/effects';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery(`GET_FILM`, getFilmSaga);
+    yield takeEvery(`GET_GENRE`, getGenreSaga);
+    yield takeEvery(`GET_THIS_FILM`, getThisFilmSaga);
 }
 
 function* getFilmSaga(){
@@ -25,7 +27,29 @@ function* getFilmSaga(){
         yield put({type: `SET_FILM`, payload: getResponse.data});
     }
     catch(error){
-        console.log('error in GET:', error);
+        console.log('error in GET film:', error);
+    }
+}
+
+function* getGenreSaga(){
+    try{
+        console.log('in GET genre saga');
+        const getResponse = yield axios.get(`/film/genre`);
+        yield put({type: `SET_GENRE`, payload: getResponse.data});
+    }
+    catch(error){
+        console.log('error in GET genre:', error);
+    }
+}
+
+function* getThisFilmSaga(action){
+    try{
+        console.log('in GET this film saga:', action.payload);
+        const getResponse = yield axios.get(`/film/this/${action.payload}`);
+        yield put({type: `SET_THIS_FILM`, payload: getResponse.data});
+    }
+    catch(error){
+        console.log('error in GET this film:', error);
     }
 }
 
@@ -53,11 +77,23 @@ const genreReducer = (state = [], action) => {
     }
 }
 
+// Stores ONE movie that's clicked on
+const thisFilmReducer = (state = [], action) => {
+    console.log('in THIS film reducer');
+    switch (action.type) {
+        case 'SET_THIS_FILM':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         filmReducer,
         genreReducer,
+        thisFilmReducer
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
