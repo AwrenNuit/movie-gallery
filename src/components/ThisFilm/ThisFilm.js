@@ -7,9 +7,9 @@ class ThisFilm extends Component{
     this.props.dispatch({type: `GET_GENRE`});
   }
 
-  // Edit this film
+  // Push history to /edit
   handleClickEdit = () => {
-
+    this.props.history.push(`/edit`);
   }
 
   // Clear reducer selected film with dispatch
@@ -32,13 +32,13 @@ class ThisFilm extends Component{
     return(
       <div className="main-single-film-div">
         {this.props.reduxState.map((film, i)=>
-          <div>
+          <div key={i}>
             <img src={film.poster} alt={film.title} />
             <div className="film-title">{film.title}</div>
             <div>{film.name}</div>
             <div>{film.description}</div>
-            <button onClick={this.handleClickEdit}>EDIT</button>
             <button onClick={this.handleClickBack}>BACK</button>
+            <button onClick={this.handleClickEdit}>EDIT</button>
           </div>
         )}
       </div>
@@ -47,7 +47,7 @@ class ThisFilm extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.thisFilmReducer,
+  reduxState: reduxState.thisFilmReducer
 });
 
 export default connect(putReduxStateOnProps)(ThisFilm);

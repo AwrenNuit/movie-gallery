@@ -4,6 +4,7 @@ import {HashRouter as Router, Route} from 'react-router-dom';
 import Header from '../Header/Header';
 import FilmList from '../FilmList/FilmList';
 import ThisFilm from '../ThisFilm/ThisFilm';
+import EditFilm from '../EditFilm/EditFilm';
 
 class App extends Component {
 
@@ -14,6 +15,7 @@ class App extends Component {
         <Router>
           <Route exact path="/" component={FilmList} />
           <Route path="/details" component={ThisFilm} />
+          <Route path="/edit" component={EditFilm} />
         </Router>
       </div>
     );
