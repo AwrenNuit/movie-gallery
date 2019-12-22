@@ -50,6 +50,7 @@ class EditFilm extends Component{
     return(
       <div className="main-edit-div">
         {JSON.stringify(this.state)}
+        {JSON.stringify(this.props.reduxState)}
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
             <input type="text" onChange={(event)=>this.handleChange(event, 'title')} value={this.state.title} />

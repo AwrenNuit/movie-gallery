@@ -20,15 +20,17 @@ class FilmList extends Component{
         {/* {JSON.stringify(this.props.reduxState)} */}
         {this.props.reduxState.map((film, i)=>
           <div className="main-list-div" key={i}>
-            <div className="row">
+            <div className="column">
               <Link to={"/details/"+film.movie_id}>
                 <img onClick={()=>this.handleClick(film.movie_id)} src={film.poster} alt={film.title} />
               </Link>
             </div>
-              <div className="col film-title">{film.title}</div>
-              <div className="col">{film.name}</div>
             <div className="row">
-              <div className="col">{film.description}</div>
+              <div className="column film-title">{film.title}</div>
+              <div className="column">{film.name}</div>
+            </div>
+            <div className="row">
+              <div className="column">{film.description}</div>
             </div>
           </div>
         )}

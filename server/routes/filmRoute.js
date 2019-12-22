@@ -8,7 +8,7 @@ router.delete(`/delete/:id`, (req, res)=>{
   let id = [req.params.id];
   let SQLquery = `DELETE FROM movies
                   USING movie_genre
-                  WHERE movies.id = movie_genre.movie_id AND movies.id = $1;`;
+                  WHERE movies.id = $1;`;
   pool.query(SQLquery, id)
   .then(result=>{
     res.send(200);
