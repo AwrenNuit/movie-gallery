@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
+import TextField from '@material-ui/core/TextField';
 
 class SearchBar extends Component{
 
@@ -25,14 +26,18 @@ class SearchBar extends Component{
   render(){
     return(
       <>
-        <input type="text" onChange={(event)=>this.handleChange(event)} value={this.state.search} placeholder="search" />
-        <Link to={"/results"}>
+        <TextField id="standard-basic" 
+          label="search" 
+          className="search-in inputs"
+          onChange={(event)=>this.handleChange(event)}
+          value={this.state.search}/>
 
+        <Link to={"/results"}>
           <Fab onClick={this.handleClick} color="primary" aria-label="search">
             <SearchIcon />
           </Fab>
-
         </Link>
+
         <Link to={"/add"}>
           <p>Add a film!</p>
         </Link>

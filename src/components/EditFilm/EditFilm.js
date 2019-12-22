@@ -5,6 +5,7 @@ import Fab from '@material-ui/core/Fab';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import TextField from '@material-ui/core/TextField';
 
 class EditFilm extends Component{
 
@@ -55,6 +56,7 @@ class EditFilm extends Component{
       <div className="main-edit-div">
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
+
             <Link to={"/details/"+film.movie_id}>
               <Fab color="secondary" aria-label="cancel">
                 <CloseIcon />
@@ -73,11 +75,26 @@ class EditFilm extends Component{
               </Fab>
             </Link>
 
-            <input type="text" onChange={(event)=>this.handleChange(event, 'title')} value={this.state.title} />
-            <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} />
-            <input type="text" onChange={(event)=>this.handleChange(event, 'poster')} value={this.state.poster} />
-            <textarea rows="6" cols="30" onChange={(event)=>this.handleChange(event, 'description')} value={this.state.description}></textarea>
-          </div>
+            <br />
+            <br />
+
+            <TextField id="standard-basic" 
+              className="inputs"
+              onChange={(event)=>this.handleFilmChange(event, 'title')}
+              value={this.state.title}/>
+
+            <TextField id="standard-basic" 
+              className="inputs"
+              onChange={(event)=>this.handleFilmChange(event, 'poster')}
+              value={this.state.poster}/>
+
+            <TextField id="standard-basic" 
+              className="inputs multiline-in"
+              onChange={(event)=>this.handleFilmChange(event, 'description')}
+              value={this.state.description}
+              multiline/>
+
+            </div>
         )}
       </div>
     )
