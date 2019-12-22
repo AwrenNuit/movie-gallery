@@ -12,6 +12,7 @@ class MainMap extends Component{
   render(){
     return(
       <>
+      {JSON.stringify(this.props.film)}
       {this.props.film.map((film, i)=>
         <div key={i}>
 
@@ -20,7 +21,7 @@ class MainMap extends Component{
             </Link>
 
             <div className="film-title">{film.title}</div>
-            <div>{film.name}</div>
+            <div>{film.genres.join(', ')}</div>
             <div>{film.description}</div>
         </div>
       )}

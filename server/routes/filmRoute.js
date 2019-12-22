@@ -22,11 +22,11 @@ router.delete(`/delete/:id`, (req, res)=>{
 // GET all films
 router.get(`/`, (req, res)=>{
   console.log('in / GET');
-  let SQLquery = `SELECT *, array_agg(genres.name)
-                  FROM movies
+  let SQLquery = `SELECT movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
+                  FROM movies 
                   JOIN movie_genre ON movies.id = movie_genre.movie_id
                   JOIN genres ON genres.id = movie_genre.genre_id
-                  GROUP BY movies.id, movie_genre.id, genres.id
+                  GROUP BY movies.id
                   ORDER BY title;`;
   pool.query(SQLquery)
   .then(result=>{
