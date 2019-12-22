@@ -24,8 +24,8 @@ router.get(`/`, (req, res)=>{
   console.log('in / GET');
   let SQLquery = `SELECT *, array_agg(genres.name)
                   FROM movies
-                  JOIN movie_genre on movies.id = movie_genre.movie_id
-                  JOIN genres on genres.id = movie_genre.genre_id
+                  JOIN movie_genre ON movies.id = movie_genre.movie_id
+                  JOIN genres ON genres.id = movie_genre.genre_id
                   GROUP BY movies.id, movie_genre.id, genres.id
                   ORDER BY title;`;
   pool.query(SQLquery)
@@ -48,6 +48,26 @@ router.get(`/genre`, (req, res)=>{
   })
   .catch(error=>{
     console.log('ERROR IN /genre GET -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
+// GET searched film(s)
+router.post(`/search/:id`, (req, res)=>{
+  console.log('in /search/id GET with:', req.params.id);
+  let id = ['%' + req.params.id + '%'];
+  let SQLquery = `SELECT * , genres.name
+                  FROM movies
+                  JOIN movie_genre ON movies.id = movie_genre.movie_id
+                  JOIN genres ON genres.id = movie_genre.genre_id
+                  WHERE lower(title) SIMILAR TO $1;`;
+  pool.query(SQLquery, id)
+  .then(result=>{
+    console.log('results:', result.rows);
+    res.send(result.rows);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /search/id GET -------------------------------->', error);
     res.sendStatus(500);
   });
 });

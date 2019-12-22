@@ -5,6 +5,7 @@ import Header from '../Header/Header';
 import FilmList from '../FilmList/FilmList';
 import ThisFilm from '../ThisFilm/ThisFilm';
 import EditFilm from '../EditFilm/EditFilm';
+import Search from '../Search/Search';
 
 class App extends Component {
 
@@ -16,6 +17,7 @@ class App extends Component {
           <Route exact path="/" component={FilmList} />
           <Route path="/details/:id" component={ThisFilm} />
           <Route path="/edit/:id" component={EditFilm} />
+          <Route path="/results" component={Search} />
         </Router>
       </div>
     );

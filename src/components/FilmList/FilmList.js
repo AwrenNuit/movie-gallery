@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import MainMap from '../MainMap/MainMap';
+import SearchBar from '../SearchBar/SearchBar';
 
 
 class FilmList extends Component{
@@ -9,39 +10,19 @@ class FilmList extends Component{
     this.props.dispatch({type: `GET_FILM`});
   }
 
-  // Dispatch selected film to Saga
-  handleClick = (id) => {
-    this.props.dispatch({type: `GET_THIS_FILM`, payload: id});
-  }
-
   render(){
     return(
       <>
-        {/* {JSON.stringify(this.props.reduxState)} */}
-        {this.props.reduxState.map((film, i)=>
-          <div className="main-list-div" key={i}>
-            <div className="column">
-              <Link to={"/details/"+film.movie_id}>
-                <img onClick={()=>this.handleClick(film.movie_id)} src={film.poster} alt={film.title} />
-              </Link>
-            </div>
-            <div className="row">
-              <div className="column film-title">{film.title}</div>
-              <div className="column">{film.name}</div>
-            </div>
-            <div className="row">
-              <div className="column">{film.description}</div>
-            </div>
-          </div>
-        )}
+        <h3>All Films</h3>
+        <SearchBar />
+        <MainMap film={this.props.reduxState} />
       </>
     )
   }
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.filmReducer,
-  this: reduxState.thisFilmReducer
+  reduxState: reduxState.filmReducer
 });
 
 export default connect(putReduxStateOnProps)(FilmList);

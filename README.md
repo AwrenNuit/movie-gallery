@@ -14,7 +14,6 @@
 ## Installation
 
 ## Future Plans
-- Creating DELETE button
 - Allowing /edit page to persist upon page refresh
 - Allow genre to be edited
 - Allow genre to be added
