@@ -7,6 +7,12 @@ import CheckIcon from '@material-ui/icons/Check';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import TextField from '@material-ui/core/TextField';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 class EditFilm extends Component{
 
   state = {
@@ -33,11 +39,11 @@ class EditFilm extends Component{
 
   // Open confirmation dialog, if YES delete film and return to main film list page
   handleClickDelete = (id) => {
-    this.handleClickOpen();
-    // if(popup){
-    //   this.sendDeleteRequestToSaga(id);
-    //   this.goBack();
-    // }
+    let popup = window.confirm(`Are you sure you want to delete ${this.state.title}?`);
+    if(popup){
+      this.sendDeleteRequestToSaga(id);
+      this.goBack();
+    }
   }
 
   // Dispatch state to saga for PUT
@@ -71,7 +77,7 @@ class EditFilm extends Component{
                   <DeleteForeverIcon />
                 </Fab>
               </Link>
-              
+
               <Link to={"/details/"+film.movie_id}>
                 <Fab onClick={this.handleClickSave} color="primary" aria-label="save" 
                   style={{display:"inline-block", marginRight:"20px"}}>
