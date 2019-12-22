@@ -35,7 +35,7 @@ class AddFilm extends Component{
         <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} placeholder="genre" />
         <button onClick={this.onClickAddGenre}>ADD GENRE</button>
 
-        <select
+        <select></select>
       </>
     )
   }
