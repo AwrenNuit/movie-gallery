@@ -20,26 +20,29 @@ class AddFilm extends Component{
   }
 
   // Dispatch state to saga for POST
-  handleClickAdd = () => {
+  handleClickAddFilm = () => {
     this.props.dispatch({type: `POST_FILM`, payload: this.state});
   }
-
+///////////////////////////////////// MAKE THREE BUTTONS - ADD FILM, ADD GENRE, ADD GENRE TO FILM (dropdowns that populate from map?)
   render(){
     return(
       <>
         <input type="text" onChange={(event)=>this.handleChange(event, 'title')} value={this.state.title} placeholder="film title" />
-        <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} placeholder="genre" />
         <input type="text" onChange={(event)=>this.handleChange(event, 'poster')} value={this.state.poster} placeholder="https://movie.com/image.jpg" />
         <textarea rows="6" cols="30" onChange={(event)=>this.handleChange(event, 'description')} value={this.state.description} placeholder="film synopsis"></textarea>
-        <Link to={"/"}>
-          <button>CANCEL</button>
-        </Link>
-        <Link to={"/"}>
-          <button onClick={this.handleClickAdd}>ADD</button>
-        </Link>
+        <button onClick={this.handleClickAddFilm}>ADD FILM</button>
+
+        <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} placeholder="genre" />
+        <button onClick={this.onClickAddGenre}>ADD GENRE</button>
+
+        <select
       </>
     )
   }
 }
 
-export default connect()(AddFilm);
+const putReduxStateOnProps = (reduxState)=>({
+  reduxState: reduxState.filmReducer
+});
+
+export default connect(putReduxStateOnProps)(AddFilm);

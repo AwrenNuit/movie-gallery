@@ -23,6 +23,7 @@ This app displays a list of films. Users can use the SEARCH bar to find all movi
 - Allow genre to be added
   - Make conditional in router
 - Allow user to add film (and genre)
+ - Genre currently REQUIRED to add film
 
 Thank you to everyone at Prime Digital Academy for helping me learn a new skill.
 
