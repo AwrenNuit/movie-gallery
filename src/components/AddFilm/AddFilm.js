@@ -17,29 +17,60 @@ class AddFilm extends Component{
       name: ''
     },
     junction: {
-      film: '',
-      genre: ''
+      movie_id: '',
+      genre_id: ''
     }
   }
 
-  // Set state to input value
-  handleChange = (event, propName) => {
+  // Dispatch film state to saga for POST
+  handleClickAddFilm = () => {
+    this.props.dispatch({type: `POST_FILM`, payload: this.state.film});
+  }
+
+  // Dispatch genre state to saga for POST
+  handleClickAddGenre = () => {
+    this.props.dispatch({type: `POST_GENRE`, payload: this.state.genre});
+  }
+
+  // Dispatch junction state to saga for POST
+  handleClickJoinFilmAndGenre = () => {
+    this.props.dispatch({type: `POST_FILM_AND_GENRE`, payload: this.state.junction});
+  }
+
+  // Set film state to input value
+  handleFilmChange = (event, propName) => {
     this.setState({
       film: {
         ...this.state.film,
         [propName]: event.target.value
       }
-    })
+    });
   }
 
-  // Dispatch state to saga for POST
-  handleClickAddFilm = () => {
-    this.props.dispatch({type: `POST_FILM`, payload: this.state});
+  // Set genre state to input value
+  handleGenreChange = (event) => {
+    this.setState({
+      genre: {
+        name: event.target.value
+      }
+    });
   }
-///////////////////////////////////// MAKE THREE BUTTONS - ADD FILM, ADD GENRE, ADD GENRE TO FILM (dropdowns that populate from map?)
+
+  // Set junction state to input value
+  handleJunctionChange = (event, propName) => {
+    this.setState({
+      junction: {
+        ...this.state.junction,
+        [propName]: event.target.value
+      }
+    });
+  }
+
   render(){
     return(
-      <>
+      <>        {JSON.stringify(this.state)}
+
+
         {JSON.stringify(this.props.reduxState)}
         <Link to={"/"}>
           <Fab color="secondary" aria-label="cancel">
@@ -50,11 +81,10 @@ class AddFilm extends Component{
         <br />
         <br />
 
-        <h3>Add a Film</h3>
-        <input type="text" onChange={(event)=>this.handleChange(event, 'title')} value={this.state.title} placeholder="film title" />
-        <input type="text" onChange={(event)=>this.handleChange(event, 'poster')} value={this.state.poster} placeholder="https://movie.com/image.jpg" />
-        <textarea rows="6" cols="30" onChange={(event)=>this.handleChange(event, 'description')} value={this.state.description} placeholder="film synopsis"></textarea>
-        {/* <button onClick={this.handleClickAddFilm}>ADD FILM</button> */}
+        <h3>Add a New Film</h3>
+        <input type="text" onChange={(event)=>this.handleFilmChange(event, 'title')} value={this.state.film.title} placeholder="film title" />
+        <input type="text" onChange={(event)=>this.handleFilmChange(event, 'poster')} value={this.state.film.poster} placeholder="https://movie.com/image.jpg" />
+        <textarea rows="6" cols="30" onChange={(event)=>this.handleFilmChange(event, 'description')} value={this.state.film.description} placeholder="film synopsis"></textarea>
         <Fab onClick={this.handleClickAddFilm} color="primary" aria-label="add">
           <CheckIcon />
         </Fab>
@@ -62,9 +92,8 @@ class AddFilm extends Component{
         <br />
         <br />
 
-        <h3>Add a Genre</h3>
-        <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} placeholder="genre" />
-        {/* <button onClick={this.onClickAddGenre}>ADD GENRE</button> */}
+        <h3>Add a New Genre</h3>
+        <input type="text" onChange={(event)=>this.handleGenreChange(event)} value={this.state.genre.name} placeholder="genre" />
         <Fab onClick={this.handleClickAddGenre} color="primary" aria-label="add">
           <CheckIcon />
         </Fab>
@@ -74,15 +103,23 @@ class AddFilm extends Component{
 
         <h3>Add a Genre to a Film</h3>
 
-        <select>
+        <select onChange={(event)=>this.handleJunctionChange(event, 'movie_id')} 
+          value={this.state.junction.movie_id}>
+
+          <option value="" selected>select a film</option>
+
           {this.props.reduxState.map((film, i)=>
-            <option key={i} value={film.title}>{film.title}</option>
+            <option key={i} value={film.movie_id}>{film.title}</option>
           )}
         </select>
 
-        <select>
+        <select onChange={(event)=>this.handleJunctionChange(event, 'genre_id')} 
+          value={this.state.junction.genre_id}>
+
+          <option value="" selected>select a genre</option>
+
           {this.props.reduxState.map((genre, i)=>
-            <option key={i} value={genre.name}>{genre.name}</option>
+            <option key={i} value={genre.genre_id}>{genre.name}</option>
           )}
         </select>
 

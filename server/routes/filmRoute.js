@@ -92,16 +92,32 @@ router.get(`/this/:id`, (req, res)=>{
 
 // POST new film
 router.post(`/`, (req, res)=>{
-  console.log('in / POST with:', req.body);
-  let id = [req.body.title, req.body.poster, req.body.description]; //req.body.name
+  console.log('in / POST new film with:', req.body);
+  let id = [req.body.title, req.body.poster, req.body.description];
   let SQLquery = `INSERT INTO movies(title, poster, description)
-                  VALUES($1, $2, $3);`; /////////////ADD GENRES & MOVIE_GENRE PAIR
+                  VALUES($1, $2, $3);`;
   pool.query(SQLquery, id)
   .then(result=>{
     res.sendStatus(201);
   })
   .catch(error=>{
-    console.log('ERROR IN / POST -------------------------------->', error);
+    console.log('ERROR IN / POST new film -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
+// POST new genre
+router.post(`/genre`, (req, res)=>{
+  console.log('in / POST new genre with:', req.body);
+  let id = [req.body.name];
+  let SQLquery = `INSERT INTO genres(name)
+                  VALUES($1);`;
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.sendStatus(201);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /genre POST new genre -------------------------------->', error);
     res.sendStatus(500);
   });
 });
