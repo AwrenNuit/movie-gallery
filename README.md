@@ -18,7 +18,6 @@
 - Allow genre to be edited
 - Allow genre to be added
 - Allow user to add film (and genre)
-- Create SEARCH bar
 
 Thank you to everyone at Prime Digital Academy for helping me learn a new skill.
 
