@@ -108,7 +108,7 @@ router.post(`/`, (req, res)=>{
 
 // POST new genre
 router.post(`/genre`, (req, res)=>{
-  console.log('in / POST new genre with:', req.body);
+  console.log('in /genre POST new genre with:', req.body);
   let id = [req.body.name];
   let SQLquery = `INSERT INTO genres(name)
                   VALUES($1);`;
@@ -118,6 +118,22 @@ router.post(`/genre`, (req, res)=>{
   })
   .catch(error=>{
     console.log('ERROR IN /genre POST new genre -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
+// POST new film/genre pair to junction table
+router.post(`/junction`, (req, res)=>{
+  console.log('in /junction POST new junction with:', req.body);
+  let id = [req.body.movie_id, req.body.genre_id];
+  let SQLquery = `INSERT INTO movie_genre(movie_id, genre_id)
+                  VALUES($1, $2);`;
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.sendStatus(201);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /genre POST new junction -------------------------------->', error);
     res.sendStatus(500);
   });
 });

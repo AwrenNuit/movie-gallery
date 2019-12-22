@@ -18,6 +18,7 @@ import getGenreSaga from './redux/sagas/getGenreSaga';
 import getThisFilmSaga from './redux/sagas/getThisFilmSaga';
 import postFilmSaga from './redux/sagas/postFilmSaga';
 import postGenreSaga from './redux/sagas/postGenreSaga';
+import postJunctionSaga from './redux/sagas/postJunctionSaga';
 import searchFilmSaga from './redux/sagas/searchFilmSaga';
 // Import reducers
 import filmReducer from './redux/reducers/filmReducer';
@@ -35,6 +36,7 @@ function* watcherSaga() {
     yield takeEvery(`GET_THIS_FILM`, getThisFilmSaga);
     yield takeEvery(`POST_FILM`, postFilmSaga);
     yield takeEvery(`POST_GENRE`, postGenreSaga);
+    yield takeEvery(`POST_JUNCTION`, postJunctionSaga);
     yield takeEvery(`SEARCH_FILM`, searchFilmSaga);
     
 }

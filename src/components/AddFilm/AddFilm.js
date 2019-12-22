@@ -33,8 +33,8 @@ class AddFilm extends Component{
   }
 
   // Dispatch junction state to saga for POST
-  handleClickJoinFilmAndGenre = () => {
-    this.props.dispatch({type: `POST_FILM_AND_GENRE`, payload: this.state.junction});
+  handleClickAddJunction = () => {
+    this.props.dispatch({type: `POST_JUNCTION`, payload: this.state.junction});
   }
 
   // Set film state to input value
@@ -123,7 +123,7 @@ class AddFilm extends Component{
           )}
         </select>
 
-        <Fab onClick={this.handleClickJoinFilmAndGenre} color="primary" aria-label="add">
+        <Fab onClick={this.handleClickAddJunction} color="primary" aria-label="add">
           <CheckIcon />
         </Fab>
       </>
