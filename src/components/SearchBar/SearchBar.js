@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 class SearchBar extends Component{
 
@@ -26,6 +27,12 @@ class SearchBar extends Component{
   render(){
     return(
       <>
+        <Link to={"/add"}>
+          <Button variant="contained" color="primary" style={{marginRight:"50px"}}>
+            Add new films and genres
+          </Button>
+        </Link>
+
         <TextField id="standard-basic" 
           label="search" 
           className="search-in inputs"
@@ -36,10 +43,6 @@ class SearchBar extends Component{
           <Fab onClick={this.handleClick} color="primary" aria-label="search">
             <SearchIcon />
           </Fab>
-        </Link>
-
-        <Link to={"/add"}>
-          <p>Add a film!</p>
         </Link>
       </>
     )

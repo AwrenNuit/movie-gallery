@@ -14,7 +14,7 @@ class FilmList extends Component{
     return(
       <>
         <SearchBar />
-        <h3>All Films</h3>
+        <h2>All Films</h2>
         <MainMap film={this.props.reduxState} />
       </>
     )

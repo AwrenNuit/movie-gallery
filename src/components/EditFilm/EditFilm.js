@@ -57,39 +57,43 @@ class EditFilm extends Component{
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
 
-            <Link to={"/details/"+film.movie_id}>
-              <Fab color="secondary" aria-label="cancel">
-                <CloseIcon />
-              </Fab>
-            </Link>
+            <div className="nav-btn-div">
+              <Link to={"/details/"+film.movie_id}>
+                <Fab color="secondary" aria-label="cancel" 
+                  style={{display:"inline-block", marginRight:"20px"}}>
+                  <CloseIcon />
+                </Fab>
+              </Link>
 
-            <Link to={"/details/"+film.movie_id}>
-              <Fab onClick={this.handleClickSave} color="primary" aria-label="save">
-                <CheckIcon />
-              </Fab>
-            </Link>
+              <Link to={"/details/"+film.movie_id}>
+                <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete" 
+                  style={{display:"inline-block", marginRight:"20px"}}>
+                  <DeleteForeverIcon />
+                </Fab>
+              </Link>
+              
+              <Link to={"/details/"+film.movie_id}>
+                <Fab onClick={this.handleClickSave} color="primary" aria-label="save" 
+                  style={{display:"inline-block", marginRight:"20px"}}>
+                  <CheckIcon />
+                </Fab>
+              </Link>
+            </div>
 
-            <Link to={"/details/"+film.movie_id}>
-              <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete">
-                <DeleteForeverIcon />
-              </Fab>
-            </Link>
-
-            <br />
-            <br />
+            <h2>Edit Film</h2>
 
             <TextField id="standard-basic" 
-              className="inputs"
+              style={{marginRight:"50px"}}
               onChange={(event)=>this.handleFilmChange(event, 'title')}
               value={this.state.title}/>
 
             <TextField id="standard-basic" 
-              className="inputs"
+              style={{marginRight:"50px"}}
               onChange={(event)=>this.handleFilmChange(event, 'poster')}
               value={this.state.poster}/>
 
             <TextField id="standard-basic" 
-              className="inputs multiline-in"
+              style={{marginRight:"50px", width:"300px"}}
               onChange={(event)=>this.handleFilmChange(event, 'description')}
               value={this.state.description}
               multiline/>

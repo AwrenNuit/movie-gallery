@@ -32,16 +32,21 @@ class ThisFilm extends Component{
       <div className="main-single-film-div">
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
-            <Fab onClick={this.handleClickBack} color="secondary" aria-label="back">
-              <CloseIcon />
-            </Fab>
 
-            <Link to={"/edit/"+film.movie_id}>
-              <Fab color="primary" aria-label="edit">
-                <EditIcon />
+            <div className="nav-btn-div">
+              <Fab onClick={this.handleClickBack} color="secondary" aria-label="back" 
+                style={{display:"inline-block", marginRight:"20px"}}>
+                <CloseIcon />
               </Fab>
-            </Link>
 
+              <Link to={"/edit/"+film.movie_id}>
+                <Fab color="primary" aria-label="edit" style={{display:"inline-block", marginRight:"20px"}}>
+                  <EditIcon />
+                </Fab>
+              </Link>
+            </div>
+
+            <h2>More Details</h2>
             <img src={film.poster} alt={film.title} />
             <div className="film-title">{film.title}</div>
             <div>{film.name}</div>

@@ -1,11 +1,16 @@
+* {
+  margin: 0;
+}
+
 .App {
   text-align: center;
 }
 
 .main-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 50px;
+  padding: 40px;
+  margin-bottom: 20px;
   color: white;
 }
 
@@ -13,22 +18,11 @@
   font-weight: bold;
 }
 
-.main-list-div {
-  display: flex;
-  flex-direction: column;
-  height: 400px;
+h2 {
+  text-decoration: underline;
+  margin: 30px;
 }
 
-.row {
-  display: flex;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 100%;
-  flex: 1;
-  text-align: center;
-  align-items: center;
-  border: 3px solid hotpink;
+.nav-btn-div {
+  text-align: right;
 }

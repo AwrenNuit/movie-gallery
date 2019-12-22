@@ -86,19 +86,19 @@ class AddFilm extends Component{
         <h2>Add a New Film</h2>
         <TextField id="standard-basic" 
           label="film title" 
-          className="inputs"
+          style={{marginRight:"50px"}}
           onChange={(event)=>this.handleFilmChange(event, 'title')}
           value={this.state.film.title}/>
 
         <TextField id="standard-basic" 
           label="image url" 
-          className="inputs"
+          style={{marginRight:"50px"}}
           onChange={(event)=>this.handleFilmChange(event, 'poster')}
           value={this.state.film.poster}/>
 
         <TextField id="standard-basic" 
           label="description" 
-          className="inputs multiline-in"
+          style={{marginRight:"50px"}}
           onChange={(event)=>this.handleFilmChange(event, 'description')}
           value={this.state.film.description}
           multiline/>
@@ -113,7 +113,7 @@ class AddFilm extends Component{
         <h2>Add a New Genre</h2>
         <TextField id="standard-basic" 
           label="genre" 
-          className="inputs"
+          style={{marginRight:"50px"}}
           onChange={(event)=>this.handleGenreChange(event)}
           value={this.state.genre.name}/>
 
@@ -127,7 +127,7 @@ class AddFilm extends Component{
         <h2>Add a Genre to a Film</h2>
         <TextField
           id="standard-select"
-          style={{width: "200px"}}
+          style={{width: "200px", marginRight:"50px"}}
           className="inputs"
           select
           label="select a film"
@@ -141,7 +141,7 @@ class AddFilm extends Component{
 
         <TextField
           id="standard-select"
-          style={{width: "200px"}}
+          style={{width: "200px", marginRight:"50px"}}
           className="inputs"
           select
           label="select a genre"
