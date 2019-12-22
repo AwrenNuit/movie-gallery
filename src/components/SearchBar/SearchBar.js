@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import Fab from '@material-ui/core/Fab';
+import SearchIcon from '@material-ui/icons/Search';
 
 class SearchBar extends Component{
 
@@ -25,7 +27,11 @@ class SearchBar extends Component{
       <>
         <input type="text" onChange={(event)=>this.handleChange(event)} value={this.state.search} placeholder="search" />
         <Link to={"/results"}>
-          <button onClick={this.handleClick}>Search</button>
+
+          <Fab onClick={this.handleClick} color="primary" aria-label="search">
+            <SearchIcon />
+          </Fab>
+
         </Link>
         <Link to={"/add"}>
           <p>Add a film!</p>

@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import Fab from '@material-ui/core/Fab';
+import CloseIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 
 class ThisFilm extends Component{
 
@@ -29,14 +32,20 @@ class ThisFilm extends Component{
       <div className="main-single-film-div">
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
+            <Fab onClick={this.handleClickBack} color="secondary" aria-label="back">
+              <CloseIcon />
+            </Fab>
+
+            <Link to={"/edit/"+film.movie_id}>
+              <Fab color="primary" aria-label="edit">
+                <EditIcon />
+              </Fab>
+            </Link>
+
             <img src={film.poster} alt={film.title} />
             <div className="film-title">{film.title}</div>
             <div>{film.name}</div>
             <div>{film.description}</div>
-            <button onClick={this.handleClickBack}>BACK</button>
-            <Link to={"/edit/"+film.movie_id}>
-              <button>EDIT</button>
-            </Link>
           </div>
         )}
       </div>

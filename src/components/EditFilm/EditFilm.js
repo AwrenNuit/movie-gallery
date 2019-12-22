@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import Fab from '@material-ui/core/Fab';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckIcon from '@material-ui/icons/Check';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 class EditFilm extends Component{
 
@@ -49,21 +53,30 @@ class EditFilm extends Component{
   render(){
     return(
       <div className="main-edit-div">
-        {JSON.stringify(this.state)}
-        {JSON.stringify(this.props.reduxState)}
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
+            <Link to={"/details/"+film.movie_id}>
+              <Fab color="secondary" aria-label="cancel">
+                <CloseIcon />
+              </Fab>
+            </Link>
+
+            <Link to={"/details/"+film.movie_id}>
+              <Fab onClick={this.handleClickSave} color="primary" aria-label="save">
+                <CheckIcon />
+              </Fab>
+            </Link>
+
+            <Link to={"/details/"+film.movie_id}>
+              <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete">
+                <DeleteForeverIcon />
+              </Fab>
+            </Link>
+
             <input type="text" onChange={(event)=>this.handleChange(event, 'title')} value={this.state.title} />
             <input type="text" onChange={(event)=>this.handleChange(event, 'name')} value={this.state.name} />
             <input type="text" onChange={(event)=>this.handleChange(event, 'poster')} value={this.state.poster} />
             <textarea rows="6" cols="30" onChange={(event)=>this.handleChange(event, 'description')} value={this.state.description}></textarea>
-            <Link to={"/details/"+film.movie_id}>
-              <button>CANCEL</button>
-            </Link>
-            <Link to={"/details/"+film.movie_id}>
-              <button onClick={this.handleClickSave}>SAVE</button>
-            </Link>
-            <button className="delete-btn" onClick={()=>this.handleClickDelete(film.movie_id)}>DELETE</button>
           </div>
         )}
       </div>
