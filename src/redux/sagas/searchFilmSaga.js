@@ -5,8 +5,7 @@ import {put} from 'redux-saga/effects';
 function* searchFilmSaga(action){
   try{
       console.log('in GET search film saga:', action.payload);
-      const getResponse = yield axios.post(`/film/search/${action.payload}`);
-      console.log('SEARCH DATA IS -------------------------------------------------:', getResponse.data);
+      const getResponse = yield axios.get(`/film/search/${action.payload}`);
       yield put({type: `SET_SEARCH_FILM`, payload: getResponse.data});
   }
   catch(error){

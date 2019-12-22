@@ -13,8 +13,8 @@ class FilmList extends Component{
   render(){
     return(
       <>
-        <h3>All Films</h3>
         <SearchBar />
+        <h3>All Films</h3>
         <MainMap film={this.props.reduxState} />
       </>
     )

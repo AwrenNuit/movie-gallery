@@ -52,8 +52,24 @@ router.get(`/genre`, (req, res)=>{
   });
 });
 
+// POST new film
+router.post(`/`, (req, res)=>{
+  console.log('in / POST with:', req.body);
+  let id = [req.body.title, req.body.poster, req.body.description]; ///req.body.name ADD THIS
+  let SQLquery = `INSERT INTO movies(title, poster, description)
+                  VALUES($1, $2, $3);`; /////////////ADD GENRE
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.sendStatus(201);
+  })
+  .catch(error=>{
+    console.log('ERROR IN / POST -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET searched film(s)
-router.post(`/search/:id`, (req, res)=>{
+router.get(`/search/:id`, (req, res)=>{
   console.log('in /search/id GET with:', req.params.id);
   let id = ['%' + req.params.id + '%'];
   let SQLquery = `SELECT * , genres.name
@@ -63,7 +79,6 @@ router.post(`/search/:id`, (req, res)=>{
                   WHERE lower(title) SIMILAR TO $1;`;
   pool.query(SQLquery, id)
   .then(result=>{
-    console.log('results:', result.rows);
     res.send(result.rows);
   })
   .catch(error=>{

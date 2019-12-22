@@ -16,12 +16,13 @@ import editFilmSaga from './redux/sagas/editFilmSaga';
 import getFilmSaga from './redux/sagas/getFilmSaga';
 import getGenreSaga from './redux/sagas/getGenreSaga';
 import getThisFilmSaga from './redux/sagas/getThisFilmSaga';
+import postFilmSaga from './redux/sagas/postFilmSaga';
 import searchFilmSaga from './redux/sagas/searchFilmSaga';
 // Import reducers
 import filmReducer from './redux/reducers/filmReducer';
 import genreReducer from './redux/reducers/genreReducer';
 import thisFilmReducer from './redux/reducers/thisFilmReducer';
-import searchFilmReducer from './redux/reducers/searchFilmReducer';
+import searchFilmReducer from './redux/reducers/searchFilmReducer'
 
 
 // Create the watcherSaga generator function
@@ -31,6 +32,7 @@ function* watcherSaga() {
     yield takeEvery(`GET_FILM`, getFilmSaga);
     yield takeEvery(`GET_GENRE`, getGenreSaga);
     yield takeEvery(`GET_THIS_FILM`, getThisFilmSaga);
+    yield takeEvery(`POST_FILM`, postFilmSaga);
     yield takeEvery(`SEARCH_FILM`, searchFilmSaga);
     
 }

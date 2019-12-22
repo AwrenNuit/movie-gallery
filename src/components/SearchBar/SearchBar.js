@@ -27,6 +27,9 @@ class SearchBar extends Component{
         <Link to={"/results"}>
           <button onClick={this.handleClick}>Search</button>
         </Link>
+        <Link to={"/add"}>
+          <p>Add a film!</p>
+        </Link>
       </>
     )
   }

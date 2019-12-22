@@ -21,6 +21,7 @@ This app displays a list of films. Users can use the SEARCH bar to find all movi
 - Allowing /edit page to persist upon page refresh
 - Allow genre to be edited
 - Allow genre to be added
+  - Make conditional in router
 - Allow user to add film (and genre)
 
 Thank you to everyone at Prime Digital Academy for helping me learn a new skill.
