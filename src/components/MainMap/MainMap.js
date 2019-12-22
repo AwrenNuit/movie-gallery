@@ -13,15 +13,19 @@ class MainMap extends Component{
     return(
       <>
       {this.props.film.map((film, i)=>
-        <div key={i}>
+        <div className="main-map-container" key={i}>
+          <div className="grid-container">
 
-            <Link to={"/details/"+film.movie_id}>
-              <img onClick={()=>this.handleClick(film.movie_id)} src={film.poster} alt={film.title} />
-            </Link>
+            <div className="item1">
+              <Link to={"/details/"+film.movie_id}>
+                <img onClick={()=>this.handleClick(film.movie_id)} src={film.poster} alt={film.title} />
+              </Link>
+            </div>
 
-            <div className="film-title">{film.title}</div>
-            <div>{film.genres.join(', ')}</div>
-            <div>{film.description}</div>
+            <div className="film-title item2">{film.title}</div>
+            <div className="item3">{film.genres.join(', ')}</div>
+            <div className="item4">{film.description}</div>
+            </div>
         </div>
       )}
       </>

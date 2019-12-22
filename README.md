@@ -19,7 +19,7 @@ This app displays a list of films. Users can use the SEARCH bar to find all movi
 
 ## Future Plans
 - Allowing /edit page to persist upon page refresh
-- Allow genre to be edited
+- Allowing a film's genre to be edited and/or removed
 - Making the delete confirmation look better
 
 Thank you to everyone at Prime Digital Academy for helping me learn a new skill.
