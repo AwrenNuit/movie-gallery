@@ -13,7 +13,7 @@ class AddFilm extends Component{
     film: {
       title: '',
       poster: '',
-      description: '',
+      description: ''
     },
     genre: {
       name: ''
@@ -29,19 +29,52 @@ class AddFilm extends Component{
     this.props.dispatch({type: `GET_GENRE`});
   }
 
+  // Clear film state
+  clearFilmState = () => {
+    this.setState({
+      film: {
+        title: '',
+        poster: '',
+        description: ''
+      }
+    })
+  }
+
+  // Clear genre state
+  clearGenreState = () => {
+    this.setState({
+      genre: {
+        name: ''
+      }
+    })
+  }
+
+  // Clear junction state
+  clearJunctionState = () => {
+    this.setState({
+      junction: {
+        movie_id: '',
+        genre_id: ''
+      }
+    })
+  }
+
   // Dispatch film state to saga for POST
   handleClickAddFilm = () => {
     this.props.dispatch({type: `POST_FILM`, payload: this.state.film});
+    this.clearFilmState();
   }
 
   // Dispatch genre state to saga for POST
   handleClickAddGenre = () => {
     this.props.dispatch({type: `POST_GENRE`, payload: this.state.genre});
+    this.clearGenreState();
   }
 
   // Dispatch junction state to saga for POST
   handleClickAddJunction = () => {
     this.props.dispatch({type: `POST_JUNCTION`, payload: this.state.junction});
+    this.clearJunctionState();
   }
 
   // Set film state to input value
