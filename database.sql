@@ -1,7 +1,9 @@
+DROP TABLE "movies", "genres", "movie_genre";
+
 CREATE TABLE "movies" (
   "id" SERIAL PRIMARY KEY,
   "title" VARCHAR(120) NOT NULL,
-  "poster"  VARCHAR(120) NOT NULL,
+  "poster"  VARCHAR(255) NOT NULL,
   "description" TEXT NOT NULL
 );
 
@@ -65,4 +67,4 @@ VALUES
 ('Superhero');
 
 -- insert into junction table
-INSERT INTO "movie_genre"("movie_id", "genre_id") VALUES(1,11), (2,10), (3,13), (4,2), (5,6), (6,8), (7,1), (8,6), (9,2), (10,12), (11,11), (12,6), (14,4), (15,5);
+INSERT INTO "movie_genre"("movie_id", "genre_id") VALUES(1,11), (2,10), (3,13), (4,2), (5,6), (6,8), (7,1), (8,6), (9,2), (10,12), (11,11), (12,6), (13,5), (14,4);

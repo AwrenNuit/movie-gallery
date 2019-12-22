@@ -52,22 +52,6 @@ router.get(`/genre`, (req, res)=>{
   });
 });
 
-// POST new film
-router.post(`/`, (req, res)=>{
-  console.log('in / POST with:', req.body);
-  let id = [req.body.title, req.body.poster, req.body.description]; ///req.body.name ADD THIS
-  let SQLquery = `INSERT INTO movies(title, poster, description)
-                  VALUES($1, $2, $3);`; /////////////ADD GENRE
-  pool.query(SQLquery, id)
-  .then(result=>{
-    res.sendStatus(201);
-  })
-  .catch(error=>{
-    console.log('ERROR IN / POST -------------------------------->', error);
-    res.sendStatus(500);
-  });
-});
-
 // GET searched film(s)
 router.get(`/search/:id`, (req, res)=>{
   console.log('in /search/id GET with:', req.params.id);
@@ -106,14 +90,30 @@ router.get(`/this/:id`, (req, res)=>{
   });
 });
 
-// PUT route to update film values in database
-router.put(`/:id`, (req, res)=>{
-  console.log('in /id PUT with:', req.params, req.body);
-  let id = [req.params.id, req.body.title, req.body.poster, req.body.description]; //req.params.name for genre ADD LATER
-  let SQLquery = `UPDATE movies SET title = $2, poster = $3, description = $4 WHERE id = $1;`; //INSERT INTO movie_genre (movie_id, genre_id) VALUES($1, $2);
+// POST new film
+router.post(`/`, (req, res)=>{
+  console.log('in / POST with:', req.body);
+  let id = [req.body.title, req.body.poster, req.body.description]; //req.body.name
+  let SQLquery = `INSERT INTO movies(title, poster, description)
+                  VALUES($1, $2, $3);`; /////////////ADD GENRES & MOVIE_GENRE PAIR
   pool.query(SQLquery, id)
   .then(result=>{
-    res.send(200);
+    res.sendStatus(201);
+  })
+  .catch(error=>{
+    console.log('ERROR IN / POST -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
+// PUT route to update film values in database ////////////////////////////////BROKEN////////////////////
+router.put(`/:id`, (req, res)=>{
+  console.log('in /id PUT with:', req.params, req.body);
+  let id = [req.params.id, req.body.title, req.body.poster, req.body.description]; //req.params.name
+  let SQLquery = `UPDATE movies SET title = $2, poster = $3, description = $4 WHERE id = $1;`; //INSERT INTO movie_genre(movie_id, genre_id) JOIN genres ON genres.id = movie_genre.genre_id WHERE genres.name = $5 VALUES($1, genres.id);
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.sendStatus(200);
   })
   .catch(error=>{
     console.log('ERROR IN /id PUT film -------------------------------->', error);
