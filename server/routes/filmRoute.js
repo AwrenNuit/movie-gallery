@@ -22,7 +22,7 @@ router.delete(`/delete/:id`, (req, res)=>{
 // GET all films
 router.get(`/`, (req, res)=>{
   console.log('in / GET');
-  let SQLquery = `SELECT movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
+  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies 
                   JOIN movie_genre ON movies.id = movie_genre.movie_id
                   JOIN genres ON genres.id = movie_genre.genre_id
@@ -138,11 +138,10 @@ router.post(`/junction`, (req, res)=>{
   });
 });
 
-// PUT route to update film values in database ////////////////////////////////BROKEN////////////////////
 router.put(`/:id`, (req, res)=>{
   console.log('in /id PUT with:', req.params, req.body);
-  let id = [req.params.id, req.body.title, req.body.poster, req.body.description]; //req.params.name
-  let SQLquery = `UPDATE movies SET title = $2, poster = $3, description = $4 WHERE id = $1;`; //INSERT INTO movie_genre(movie_id, genre_id) JOIN genres ON genres.id = movie_genre.genre_id WHERE genres.name = $5 VALUES($1, genres.id);
+  let id = [req.params.id, req.body.title, req.body.poster, req.body.description];
+  let SQLquery = `UPDATE movies SET title = $2, poster = $3, description = $4 WHERE id = $1;`;
   pool.query(SQLquery, id)
   .then(result=>{
     res.sendStatus(200);

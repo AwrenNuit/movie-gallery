@@ -12,7 +12,6 @@ class MainMap extends Component{
   render(){
     return(
       <>
-      {JSON.stringify(this.props.film)}
       {this.props.film.map((film, i)=>
         <div key={i}>
 

@@ -24,6 +24,11 @@ class AddFilm extends Component{
     }
   }
 
+  componentDidMount(){
+    this.props.dispatch({type: `GET_FILM`});
+    this.props.dispatch({type: `GET_GENRE`});
+  }
+
   // Dispatch film state to saga for POST
   handleClickAddFilm = () => {
     this.props.dispatch({type: `POST_FILM`, payload: this.state.film});
@@ -70,18 +75,14 @@ class AddFilm extends Component{
 
   render(){
     return(
-      <>        {JSON.stringify(this.state)}
-
-
-        {JSON.stringify(this.props.reduxState)}
-        <Link to={"/"}>
-          <Fab color="secondary" aria-label="cancel">
-            <CloseIcon />
-          </Fab>
-        </Link>
-
-        <br />
-        <br />
+      <>
+        <div className="nav-btn-div">
+          <Link to={"/"}>
+            <Fab color="secondary" aria-label="cancel" style={{display:"inline-block", marginRight:"20px"}}>
+              <CloseIcon />
+            </Fab>
+          </Link>
+        </div>
 
         <h2>Add a New Film</h2>
         <TextField id="standard-basic" 
@@ -148,8 +149,8 @@ class AddFilm extends Component{
           value={this.state.junction.genre_id}
           onChange={(event)=>this.handleJunctionChange(event, 'genre_id')}>
 
-          {this.props.reduxState.map((genre, i)=>
-            <MenuItem key={i} value={genre.genre_id}>{genre.name}</MenuItem>
+          {this.props.genre.map((genre, i)=>
+            <MenuItem key={i} value={genre.id}>{genre.name}</MenuItem>
           )}
         </TextField>
 
@@ -162,7 +163,8 @@ class AddFilm extends Component{
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.filmReducer
+  reduxState: reduxState.filmReducer,
+  genre: reduxState.genreReducer
 });
 
 export default connect(putReduxStateOnProps)(AddFilm);

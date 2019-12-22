@@ -7,6 +7,13 @@ import CheckIcon from '@material-ui/icons/Check';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import TextField from '@material-ui/core/TextField';
 
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 class EditFilm extends Component{
 
   state = {
@@ -23,6 +30,18 @@ class EditFilm extends Component{
     this.props.history.push(`/`);
   }
 
+  handleClickOpen = () => {
+    this.setState({
+      open: true
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      open: false
+    });
+  };
+
   // Set state to input value
   handleChange = (event, propName) => {
     this.setState({
@@ -33,11 +52,11 @@ class EditFilm extends Component{
 
   // Open confirmation dialog, if YES delete film and return to main film list page
   handleClickDelete = (id) => {
-    let popup = window.confirm(`Are you sure you want to delete ${this.state.title}?`);
-    if(popup){
-      this.sendDeleteRequestToSaga(id);
-      this.goBack();
-    }
+    this.handleClickOpen();
+    // if(popup){
+    //   this.sendDeleteRequestToSaga(id);
+    //   this.goBack();
+    // }
   }
 
   // Dispatch state to saga for PUT
@@ -71,7 +90,29 @@ class EditFilm extends Component{
                   <DeleteForeverIcon />
                 </Fab>
               </Link>
-              
+
+      <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Delete?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to permanently remove ${this.state.title} from your library?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="secondary">
+            No
+          </Button>
+          <Button onClick={this.handleClose} color="primary">
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+
+
+
+
               <Link to={"/details/"+film.movie_id}>
                 <Fab onClick={this.handleClickSave} color="primary" aria-label="save" 
                   style={{display:"inline-block", marginRight:"20px"}}>
