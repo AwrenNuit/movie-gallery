@@ -4,7 +4,6 @@ import {put} from 'redux-saga/effects';
 // Saga to GET the searched film(s) and genre
 function* searchFilmSaga(action){
   try{
-      console.log('in GET search film saga:', action.payload);
       const getResponse = yield axios.get(`/film/search/${action.payload}`);
       yield put({type: `SET_SEARCH_FILM`, payload: getResponse.data});
   }

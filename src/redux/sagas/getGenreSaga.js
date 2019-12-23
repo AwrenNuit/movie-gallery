@@ -4,7 +4,6 @@ import {put} from 'redux-saga/effects';
 // Saga to GET all genres
 function* getGenreSaga(){
   try{
-      console.log('in GET genre saga');
       const getResponse = yield axios.get(`/film/genre`);
       yield put({type: `SET_GENRE`, payload: getResponse.data});
   }

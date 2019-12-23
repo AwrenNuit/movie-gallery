@@ -4,7 +4,6 @@ const pool = require(`../modules/pool`);
 
 // DELETE selected film
 router.delete(`/delete/:id`, (req, res)=>{
-  console.log('in `/delete/id DELETE with:', req.params.id);
   let id = [req.params.id];
   let SQLquery = `DELETE FROM movies
                   USING movie_genre
@@ -21,7 +20,6 @@ router.delete(`/delete/:id`, (req, res)=>{
 
 // GET all films
 router.get(`/`, (req, res)=>{
-  console.log('in / GET');
   let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies 
                   LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
@@ -40,7 +38,6 @@ router.get(`/`, (req, res)=>{
 
 // GET all genres
 router.get(`/genre`, (req, res)=>{
-  console.log('in /genre GET');
   let SQLquery = `SELECT * FROM genres;`;
   pool.query(SQLquery)
   .then(result=>{
@@ -54,7 +51,6 @@ router.get(`/genre`, (req, res)=>{
 
 // GET searched film(s)
 router.get(`/search/:id`, (req, res)=>{
-  console.log('in /search/id GET with:', req.params.id);
   let id = ['%' + req.params.id + '%'];
   let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies
@@ -75,7 +71,6 @@ router.get(`/search/:id`, (req, res)=>{
 
 // GET selected film and genre
 router.get(`/this/:id`, (req, res)=>{
-  console.log('in /this/id GET');
   let id = [req.params.id];
   let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies
@@ -95,7 +90,6 @@ router.get(`/this/:id`, (req, res)=>{
 
 // POST new film
 router.post(`/`, (req, res)=>{
-  console.log('in / POST new film with:', req.body);
   let id = [req.body.title, req.body.poster, req.body.description];
   let SQLquery = `INSERT INTO movies(title, poster, description)
                   VALUES($1, $2, $3);`;
@@ -111,7 +105,6 @@ router.post(`/`, (req, res)=>{
 
 // POST new genre
 router.post(`/genre`, (req, res)=>{
-  console.log('in /genre POST new genre with:', req.body);
   let id = [req.body.name];
   let SQLquery = `INSERT INTO genres(name)
                   VALUES($1);`;
@@ -127,7 +120,6 @@ router.post(`/genre`, (req, res)=>{
 
 // POST new film/genre pair to junction table
 router.post(`/junction`, (req, res)=>{
-  console.log('in /junction POST new junction with:', req.body);
   let id = [req.body.movie_id, req.body.genre_id];
   let SQLquery = `INSERT INTO movie_genre(movie_id, genre_id)
                   VALUES($1, $2);`;
@@ -142,7 +134,6 @@ router.post(`/junction`, (req, res)=>{
 });
 
 router.put(`/:id`, (req, res)=>{
-  console.log('in /id PUT with:', req.params, req.body);
   let id = [req.params.id, req.body.title, req.body.poster, req.body.description];
   let SQLquery = `UPDATE movies 
                   SET title = $2, poster = $3, description = $4 
