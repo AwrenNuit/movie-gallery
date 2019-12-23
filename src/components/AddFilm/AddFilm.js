@@ -126,78 +126,85 @@ class AddFilm extends Component{
         </div>
 
         <h2>Add a New Film</h2>
-        <TextField id="standard-basic" 
-          label="film title" 
-          style={{marginRight:"50px"}}
-          onChange={(event)=>this.handleFilmChange(event, 'title')}
-          value={this.state.film.title}/>
 
-        <TextField id="standard-basic" 
-          label="image url" 
-          style={{marginRight:"50px"}}
-          onChange={(event)=>this.handleFilmChange(event, 'poster')}
-          value={this.state.film.poster}/>
+        <div className="input-div-box">
+          <TextField id="standard-basic" 
+            label="film title" 
+            style={{marginRight:"50px"}}
+            onChange={(event)=>this.handleFilmChange(event, 'title')}
+            value={this.state.film.title}/>
 
-        <TextField id="standard-basic" 
-          label="description" 
-          style={{marginRight:"50px"}}
-          onChange={(event)=>this.handleFilmChange(event, 'description')}
-          value={this.state.film.description}
-          multiline/>
+          <TextField id="standard-basic" 
+            label="image url" 
+            style={{marginRight:"50px"}}
+            onChange={(event)=>this.handleFilmChange(event, 'poster')}
+            value={this.state.film.poster}/>
 
-        <Fab className="add-btn" onClick={this.handleClickAddFilm} color="primary" aria-label="add">
-          <CheckIcon />
-        </Fab>
+          <TextField id="standard-basic" 
+            label="description" 
+            style={{marginRight:"50px", width:"300px"}}
+            onChange={(event)=>this.handleFilmChange(event, 'description')}
+            value={this.state.film.description}
+            multiline/>
+
+          <Fab onClick={this.handleClickAddFilm} color="primary" aria-label="add">
+            <CheckIcon />
+          </Fab>
+        </div>
 
         <br />
         <br />
 
         <h2>Add a New Genre</h2>
-        <TextField id="standard-basic" 
-          label="genre" 
-          style={{marginRight:"50px"}}
-          onChange={(event)=>this.handleGenreChange(event)}
-          value={this.state.genre.name}/>
 
-        <Fab className="add-btn" onClick={this.handleClickAddGenre} color="primary" aria-label="add">
-          <CheckIcon />
-        </Fab>
+        <div className="input-div-box">
+          <TextField id="standard-basic" 
+            label="genre" 
+            style={{marginRight:"50px"}}
+            onChange={(event)=>this.handleGenreChange(event)}
+            value={this.state.genre.name}/>
+
+          <Fab onClick={this.handleClickAddGenre} color="primary" aria-label="add">
+            <CheckIcon />
+          </Fab>
+        </div>
 
         <br />
         <br />
 
         <h2>Add a Genre to a Film</h2>
-        <TextField
-          id="standard-select"
-          style={{width: "200px", marginRight:"50px"}}
-          className="inputs"
-          select
-          label="select a film"
-          value={this.state.junction.movie_id}
-          onChange={(event)=>this.handleJunctionChange(event, 'movie_id')}>
 
-            {this.props.reduxState.map((film, i)=>
-              <MenuItem key={i} value={film.movie_id}>{film.title}</MenuItem>
+        <div className="input-div-box">
+          <TextField
+            id="standard-select"
+            style={{width: "200px", marginRight:"50px"}}
+            select
+            label="select a film"
+            value={this.state.junction.movie_id}
+            onChange={(event)=>this.handleJunctionChange(event, 'movie_id')}>
+
+              {this.props.reduxState.map((film, i)=>
+                <MenuItem key={i} value={film.movie_id}>{film.title}</MenuItem>
+              )}
+          </TextField>
+
+          <TextField
+            id="standard-select"
+            style={{width: "200px", marginRight:"50px"}}
+            select
+            label="select a genre"
+            value={this.state.junction.genre_id}
+            onChange={(event)=>this.handleJunctionChange(event, 'genre_id')}>
+
+            {this.props.genre.map((genre, i)=>
+              <MenuItem key={i} value={genre.id}>{genre.name}</MenuItem>
             )}
-        </TextField>
+          </TextField>
 
-        <TextField
-          id="standard-select"
-          style={{width: "200px", marginRight:"50px"}}
-          className="inputs"
-          select
-          label="select a genre"
-          value={this.state.junction.genre_id}
-          onChange={(event)=>this.handleJunctionChange(event, 'genre_id')}>
-
-          {this.props.genre.map((genre, i)=>
-            <MenuItem key={i} value={genre.id}>{genre.name}</MenuItem>
-          )}
-        </TextField>
-
-        <Fab className="add-btn" onClick={this.handleClickAddJunction} color="primary" aria-label="add">
-          <CheckIcon />
-        </Fab>
+          <Fab onClick={this.handleClickAddJunction} color="primary" aria-label="add">
+            <CheckIcon />
+          </Fab>
+        </div>
       </>
     )
   }

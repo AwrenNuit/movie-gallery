@@ -144,7 +144,9 @@ router.post(`/junction`, (req, res)=>{
 router.put(`/:id`, (req, res)=>{
   console.log('in /id PUT with:', req.params, req.body);
   let id = [req.params.id, req.body.title, req.body.poster, req.body.description];
-  let SQLquery = `UPDATE movies SET title = $2, poster = $3, description = $4 WHERE id = $1;`;
+  let SQLquery = `UPDATE movies 
+                  SET title = $2, poster = $3, description = $4 
+                  WHERE id = $1;`;
   pool.query(SQLquery, id)
   .then(result=>{
     res.sendStatus(200);
