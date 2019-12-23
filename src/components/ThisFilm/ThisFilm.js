@@ -29,7 +29,7 @@ class ThisFilm extends Component{
 
   render(){
     return(
-      <div className="main-single-film-div">
+      <div>
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
 
@@ -47,10 +47,19 @@ class ThisFilm extends Component{
             </div>
 
             <h2>More Details</h2>
-            <img src={film.poster} alt={film.title} />
-            <div className="film-title">{film.title}</div>
-            <div>{film.name}</div>
-            <div>{film.description}</div>
+            <div className="main-map-container">
+              <div className="grid-container">
+
+                <div className="item1">
+                  <img src={film.poster} alt={film.title} />
+                </div>
+
+                <div className="film-title item2">{film.title}</div>
+                {/* <div className="item3">Genre: {film.genres.join(', ')}</div> */}
+                <div className="item3">Genre: {film.name}</div>
+                <div className="item4">{film.description}</div>
+              </div>
+            </div>
           </div>
         )}
       </div>

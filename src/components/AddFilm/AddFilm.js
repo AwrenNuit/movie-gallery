@@ -25,8 +25,7 @@ class AddFilm extends Component{
   }
 
   componentDidMount(){
-    this.props.dispatch({type: `GET_FILM`});
-    this.props.dispatch({type: `GET_GENRE`});
+    this.dispatchData();
   }
 
   // Clear film state
@@ -57,6 +56,12 @@ class AddFilm extends Component{
         genre_id: ''
       }
     })
+  }
+
+  // Gets all films and genres
+  dispatchData = () => {
+    this.props.dispatch({type: `GET_FILM`});
+    this.props.dispatch({type: `GET_GENRE`});
   }
 
   // Dispatch film state to saga for POST

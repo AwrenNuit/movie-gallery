@@ -19,6 +19,7 @@ This app displays a list of films. Users can use the SEARCH bar to find all movi
 
 ## Future Plans
 - Allowing /edit page to persist upon page refresh
+- Allowing /add page to update upon film add or genre add
 - Allowing a film's genre to be edited and/or removed
 - Making the delete confirmation look better
 

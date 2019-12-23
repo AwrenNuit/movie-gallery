@@ -23,9 +23,9 @@ class MainMap extends Component{
             </div>
 
             <div className="film-title item2">{film.title}</div>
-            <div className="item3">{film.genres.join(', ')}</div>
+            <div className="item3">Genre: {film.genres.join(', ')}</div>
             <div className="item4">{film.description}</div>
-            </div>
+          </div>
         </div>
       )}
       </>

@@ -84,17 +84,17 @@ class EditFilm extends Component{
 
             <TextField id="standard-basic" 
               style={{marginRight:"50px"}}
-              onChange={(event)=>this.handleFilmChange(event, 'title')}
+              onChange={(event)=>this.handleChange(event, 'title')}
               value={this.state.title}/>
 
             <TextField id="standard-basic" 
               style={{marginRight:"50px"}}
-              onChange={(event)=>this.handleFilmChange(event, 'poster')}
+              onChange={(event)=>this.handleChange(event, 'poster')}
               value={this.state.poster}/>
 
             <TextField id="standard-basic" 
               style={{marginRight:"50px", width:"300px"}}
-              onChange={(event)=>this.handleFilmChange(event, 'description')}
+              onChange={(event)=>this.handleChange(event, 'description')}
               value={this.state.description}
               multiline/>
 
