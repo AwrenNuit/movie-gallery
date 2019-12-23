@@ -11,7 +11,7 @@ To see the fully functional site, please visit: https://young-waters-19950.herok
 ## Technologies Used
 - React
 - Redux
-- Saga
+- Redux-Saga
 - Axios
 - Node.js
 - PostgreSQL
