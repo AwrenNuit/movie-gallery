@@ -82,23 +82,24 @@ class EditFilm extends Component{
 
             <h2>Edit Film</h2>
 
-            <TextField id="standard-basic" 
-              style={{marginRight:"50px"}}
-              onChange={(event)=>this.handleChange(event, 'title')}
-              value={this.state.title}/>
+            <div className="input-div-box">
+              <TextField id="standard-basic" 
+                style={{marginRight:"50px"}}
+                onChange={(event)=>this.handleChange(event, 'title')}
+                value={this.state.title}/>
 
-            <TextField id="standard-basic" 
-              style={{marginRight:"50px"}}
-              onChange={(event)=>this.handleChange(event, 'poster')}
-              value={this.state.poster}/>
+              <TextField id="standard-basic" 
+                style={{marginRight:"50px"}}
+                onChange={(event)=>this.handleChange(event, 'poster')}
+                value={this.state.poster}/>
 
-            <TextField id="standard-basic" 
-              style={{marginRight:"50px", width:"300px"}}
-              onChange={(event)=>this.handleChange(event, 'description')}
-              value={this.state.description}
-              multiline/>
-
+              <TextField id="standard-basic" 
+                style={{marginRight:"50px", width:"300px"}}
+                onChange={(event)=>this.handleChange(event, 'description')}
+                value={this.state.description}
+                multiline/>
             </div>
+          </div>
         )}
       </div>
     )
