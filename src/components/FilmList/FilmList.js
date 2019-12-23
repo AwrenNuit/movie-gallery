@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+// Components
 import MainMap from '../MainMap/MainMap';
 import SearchBar from '../SearchBar/SearchBar';
-
 
 class FilmList extends Component{
 

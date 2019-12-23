@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import {HashRouter as Router, Route} from 'react-router-dom';
-import Header from '../Header/Header';
-import FilmList from '../FilmList/FilmList';
-import ThisFilm from '../ThisFilm/ThisFilm';
-import EditFilm from '../EditFilm/EditFilm';
-import Search from '../Search/Search';
+// Components
 import AddFilm from '../AddFilm/AddFilm';
+import EditFilm from '../EditFilm/EditFilm';
+import FilmList from '../FilmList/FilmList';
+import Header from '../Header/Header';
+import ThisFilm from '../ThisFilm/ThisFilm';
+import Search from '../Search/Search';
 
 class App extends Component {
 
@@ -16,10 +17,10 @@ class App extends Component {
         <Header />
         <Router>
           <Route exact path="/" component={FilmList} />
+          <Route path="/add" component={AddFilm} />
           <Route path="/details/:id" component={ThisFilm} />
           <Route path="/edit/:id" component={EditFilm} />
           <Route path="/results" component={Search} />
-          <Route path="/add" component={AddFilm} />
         </Router>
       </div>
     );

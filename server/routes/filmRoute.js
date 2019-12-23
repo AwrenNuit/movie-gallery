@@ -24,8 +24,8 @@ router.get(`/`, (req, res)=>{
   console.log('in / GET');
   let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies 
-                  JOIN movie_genre ON movies.id = movie_genre.movie_id
-                  JOIN genres ON genres.id = movie_genre.genre_id
+                  LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
+                  LEFT JOIN genres ON genres.id = movie_genre.genre_id
                   GROUP BY movies.id
                   ORDER BY title;`;
   pool.query(SQLquery)
@@ -56,11 +56,13 @@ router.get(`/genre`, (req, res)=>{
 router.get(`/search/:id`, (req, res)=>{
   console.log('in /search/id GET with:', req.params.id);
   let id = ['%' + req.params.id + '%'];
-  let SQLquery = `SELECT * , genres.name
+  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies
-                  JOIN movie_genre ON movies.id = movie_genre.movie_id
-                  JOIN genres ON genres.id = movie_genre.genre_id
-                  WHERE lower(title) SIMILAR TO $1;`;
+                  LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
+                  LEFT JOIN genres ON genres.id = movie_genre.genre_id
+                  WHERE lower(movies.title) SIMILAR TO $1
+                  GROUP BY movies.id
+                  ORDER BY title;`;
   pool.query(SQLquery, id)
   .then(result=>{
     res.send(result.rows);
@@ -75,11 +77,12 @@ router.get(`/search/:id`, (req, res)=>{
 router.get(`/this/:id`, (req, res)=>{
   console.log('in /this/id GET');
   let id = [req.params.id];
-  let SQLquery = `SELECT *, genres.name
+  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
                   FROM movies
-                  JOIN movie_genre on movies.id = movie_genre.movie_id
-                  JOIN genres on genres.id = movie_genre.genre_id
-                  WHERE movies.id = $1;`;
+                  LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
+                  LEFT JOIN genres ON genres.id = movie_genre.genre_id
+                  WHERE movies.id = $1
+                  GROUP BY movies.id;`;
   pool.query(SQLquery, id)
   .then(result=>{
     res.send(result.rows);

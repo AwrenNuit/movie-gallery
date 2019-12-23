@@ -26,7 +26,6 @@ import genreReducer from './redux/reducers/genreReducer';
 import thisFilmReducer from './redux/reducers/thisFilmReducer';
 import searchFilmReducer from './redux/reducers/searchFilmReducer'
 
-
 // Create the watcherSaga generator function
 function* watcherSaga() {
     yield takeEvery(`DELETE_FILM`, deleteFilmSaga);
@@ -38,7 +37,6 @@ function* watcherSaga() {
     yield takeEvery(`POST_GENRE`, postGenreSaga);
     yield takeEvery(`POST_JUNCTION`, postJunctionSaga);
     yield takeEvery(`SEARCH_FILM`, searchFilmSaga);
-    
 }
 
 // Create sagaMiddleware

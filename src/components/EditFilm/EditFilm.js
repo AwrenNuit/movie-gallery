@@ -15,7 +15,7 @@ class EditFilm extends Component{
 
   componentDidMount(){
     this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id});
-    this.setState(this.props.reduxState[0]); // DOES NOT RUN
+    this.setState(this.props.reduxState[0]); // DOES NOT SET STATE ON REFRESH
   }
 
   // Return to film list page
@@ -53,7 +53,7 @@ class EditFilm extends Component{
 
   render(){
     return(
-      <div className="main-edit-div">
+      <div>
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
 
@@ -65,7 +65,7 @@ class EditFilm extends Component{
                 </Fab>
               </Link>
 
-              <Link to={"/details/"+film.movie_id}>
+              <Link to={"/"}>
                 <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete" 
                   style={{display:"inline-block", marginRight:"20px"}}>
                   <DeleteForeverIcon />

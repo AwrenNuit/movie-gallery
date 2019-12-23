@@ -29,7 +29,7 @@ class ThisFilm extends Component{
 
   render(){
     return(
-      <div>
+      <>
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
 
@@ -55,14 +55,13 @@ class ThisFilm extends Component{
                 </div>
 
                 <div className="film-title item2">{film.title}</div>
-                {/* <div className="item3">Genre: {film.genres.join(', ')}</div> */}
-                <div className="item3">Genre: {film.name}</div>
+                <div className="item3">Genre: {film.genres.join(', ')}</div>
                 <div className="item4">{film.description}</div>
               </div>
             </div>
           </div>
         )}
-      </div>
+      </>
     )
   }
 }
