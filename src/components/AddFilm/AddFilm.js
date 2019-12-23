@@ -68,18 +68,21 @@ class AddFilm extends Component{
   handleClickAddFilm = () => {
     this.props.dispatch({type: `POST_FILM`, payload: this.state.film});
     this.clearFilmState();
+    alert(`New film added!`);
   }
 
   // Dispatch genre state to saga for POST
   handleClickAddGenre = () => {
     this.props.dispatch({type: `POST_GENRE`, payload: this.state.genre});
     this.clearGenreState();
+    alert(`New genre added!`);
   }
 
   // Dispatch junction state to saga for POST
   handleClickAddJunction = () => {
     this.props.dispatch({type: `POST_JUNCTION`, payload: this.state.junction});
     this.clearJunctionState();
+    alert(`Genre added to film!`);
   }
 
   // Set film state to input value
