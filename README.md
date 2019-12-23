@@ -25,6 +25,6 @@ This app displays a list of films. Users can use the SEARCH bar to find all film
 - Allowing a film's genre to be edited and/or removed
 - Making the delete confirmation look better
 
-Thank you to the faculty at Prime Digital Academy for helping me learn a new skill and ESPECIALLY my classmates for being so supportive.
+Thank you to the everyone at Prime Digital Academy for helping me learn a new skill and for being so supportive.
 
 If you have questions or concerns, email me at awren.nuit@gmail.com
