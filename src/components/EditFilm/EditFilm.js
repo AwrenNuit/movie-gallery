@@ -64,17 +64,18 @@ class EditFilm extends Component{
           <div key={i}>
 
             <div className="nav-btn-div">
+
+              <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="default" aria-label="delete" 
+                style={{display:"inline-block", marginRight:"20px"}}>
+                <DeleteForeverIcon />
+              </Fab>
+
               <Link to={"/details/"+film.title}>
                 <Fab color="secondary" aria-label="cancel" 
                   style={{display:"inline-block", marginRight:"20px"}}>
                   <CloseIcon />
                 </Fab>
               </Link>
-
-              <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete" 
-                style={{display:"inline-block", marginRight:"20px"}}>
-                <DeleteForeverIcon />
-              </Fab>
 
               <Fab onClick={()=>this.handleClickSave(film.title)} color="primary" aria-label="save" 
                 style={{display:"inline-block", marginRight:"20px"}}>
