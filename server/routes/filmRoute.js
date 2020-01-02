@@ -25,7 +25,7 @@ router.get(`/`, (req, res)=>{
                   LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
                   LEFT JOIN genres ON genres.id = movie_genre.genre_id
                   GROUP BY movies.id
-                  ORDER BY title;`;
+                  ORDER BY lower(title);`;
   pool.query(SQLquery)
   .then(result=>{
     res.send(result.rows);
