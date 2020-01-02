@@ -11,7 +11,7 @@ class ThisFilm extends Component{
     this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id})
   }
 
-  // Clear reducer selected film with dispatch
+  // Clear reducer for selected film
   emptyReducer = () => {
     this.props.dispatch({type: `SET_THIS_FILM`, payload: []});
   }
@@ -30,6 +30,7 @@ class ThisFilm extends Component{
   render(){
     return(
       <>
+      {JSON.stringify(this.props.match)}
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
 
@@ -39,7 +40,7 @@ class ThisFilm extends Component{
                 <CloseIcon />
               </Fab>
 
-              <Link to={"/edit/"+film.movie_id}>
+              <Link to={"/edit/"+film.title}>
                 <Fab color="primary" aria-label="edit" style={{display:"inline-block", marginRight:"20px"}}>
                   <EditIcon />
                 </Fab>

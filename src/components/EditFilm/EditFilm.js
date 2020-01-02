@@ -15,7 +15,12 @@ class EditFilm extends Component{
 
   componentDidMount(){
     this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id});
-    this.setState(this.props.reduxState[0]); // DOES NOT SET STATE ON REFRESH
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.reduxState !== prevProps.reduxState){
+      this.setState(this.props.reduxState[0]);
+    }
   }
 
   // Return to film list page
@@ -41,8 +46,9 @@ class EditFilm extends Component{
   }
 
   // Dispatch state to saga for PUT
-  handleClickSave = () => {
+  handleClickSave = (title) => {
     this.props.dispatch({type: `EDIT_FILM`, payload: this.state});
+    this.props.history.push('/details/'+title);
   }
 
   // Dispatch film ID to saga for DELETE
@@ -58,26 +64,22 @@ class EditFilm extends Component{
           <div key={i}>
 
             <div className="nav-btn-div">
-              <Link to={"/details/"+film.movie_id}>
+              <Link to={"/details/"+film.title}>
                 <Fab color="secondary" aria-label="cancel" 
                   style={{display:"inline-block", marginRight:"20px"}}>
                   <CloseIcon />
                 </Fab>
               </Link>
 
-              <Link to={"/"}>
-                <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete" 
-                  style={{display:"inline-block", marginRight:"20px"}}>
-                  <DeleteForeverIcon />
-                </Fab>
-              </Link>
+              <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete" 
+                style={{display:"inline-block", marginRight:"20px"}}>
+                <DeleteForeverIcon />
+              </Fab>
 
-              <Link to={"/details/"+film.movie_id}>
-                <Fab onClick={this.handleClickSave} color="primary" aria-label="save" 
-                  style={{display:"inline-block", marginRight:"20px"}}>
-                  <CheckIcon />
-                </Fab>
-              </Link>
+              <Fab onClick={()=>this.handleClickSave(film.title)} color="primary" aria-label="save" 
+                style={{display:"inline-block", marginRight:"20px"}}>
+                <CheckIcon />
+              </Fab>
             </div>
 
             <h2>Edit Film</h2>

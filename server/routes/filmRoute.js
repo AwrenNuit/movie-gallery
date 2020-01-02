@@ -76,7 +76,7 @@ router.get(`/this/:id`, (req, res)=>{
                   FROM movies
                   LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
                   LEFT JOIN genres ON genres.id = movie_genre.genre_id
-                  WHERE movies.id = $1
+                  WHERE movies.title = $1
                   GROUP BY movies.id;`;
   pool.query(SQLquery, id)
   .then(result=>{

@@ -17,7 +17,7 @@ class MainMap extends Component{
           <div className="grid-container">
 
             <div className="item1">
-              <Link to={"/details/"+film.movie_id}>
+              <Link to={"/details/"+film.title}>
                 <img onClick={()=>this.handleClick(film.movie_id)} src={film.poster} alt={film.title} />
               </Link>
             </div>
