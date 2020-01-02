@@ -30,7 +30,6 @@ class ThisFilm extends Component{
   render(){
     return(
       <>
-      {JSON.stringify(this.props.match)}
         {this.props.reduxState.map((film, i)=>
           <div key={i}>
 
