@@ -88,18 +88,21 @@ class EditFilm extends Component{
             <div className="input-div-box">
               <TextField id="standard-basic" 
                 style={{marginRight:"50px"}}
+                label="film title"
                 onChange={(event)=>this.handleChange(event, 'title')}
-                value={this.state.title}/>
+                value={this.state.title || ''}/>
 
               <TextField id="standard-basic" 
                 style={{marginRight:"50px"}}
+                label="film poster"
                 onChange={(event)=>this.handleChange(event, 'poster')}
-                value={this.state.poster}/>
+                value={this.state.poster || ''}/>
 
               <TextField id="standard-basic" 
                 style={{marginRight:"50px", width:"300px"}}
+                label="film description"
                 onChange={(event)=>this.handleChange(event, 'description')}
-                value={this.state.description}
+                value={this.state.description || ''}
                 multiline/>
             </div>
           </div>
