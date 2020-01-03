@@ -27,6 +27,8 @@ class EditFilmGenre extends Component{
     this.props.dispatch({type: `GET_GENRE`});
   }
 
+  // Cannot figure out why adding or removing a genre seems to have about a 50% chance 
+  // of adding it to the list without manual refresh
   componentDidUpdate(prevProps){
     if(this.props.reduxState !== prevProps.reduxState){
       this.setState(this.props.reduxState[0]);
