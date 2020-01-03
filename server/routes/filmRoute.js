@@ -20,7 +20,6 @@ router.delete(`/delete/:id`, (req, res)=>{
 
 // DELETE film/genre pair from junction table
 router.delete(`/junction`, (req, res)=>{
-  console.log('in delete genre with:', req.body);
   let id = [req.body.movie_id, req.body.genre_id];
   let SQLquery = `DELETE FROM movie_genre
                   USING movies, genres
