@@ -18,6 +18,22 @@ router.delete(`/delete/:id`, (req, res)=>{
   });
 });
 
+// DELETE film/genre pair from junction table
+router.post(`/junction`, (req, res)=>{
+  let id = [req.body.movie_id, req.body.genre_id];
+  let SQLquery = `DELETE FROM movie_genre
+                  USING movies, genres
+                  WHERE movie_id = $1 AND genre_id = $2;`;
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.sendStatus(201);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /junction DELETE new junction -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
 // GET all films
 router.get(`/`, (req, res)=>{
   let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
@@ -128,7 +144,7 @@ router.post(`/junction`, (req, res)=>{
     res.sendStatus(201);
   })
   .catch(error=>{
-    console.log('ERROR IN /genre POST new junction -------------------------------->', error);
+    console.log('ERROR IN /junction POST new junction -------------------------------->', error);
     res.sendStatus(500);
   });
 });
