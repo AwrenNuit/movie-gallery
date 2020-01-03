@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {put} from 'redux-saga/effects';
 
-// Saga to POST new genre
+// Saga to DELETE a genre from selected film
 function* deleteJunctionSaga(action){
   try{
-      yield axios.post(`/film/junction`, action.payload);
+      yield axios.delete(`/film/junction`, action.payload);
       yield put({type: `GET_FILM`});
   }
   catch(error){

@@ -10,7 +10,7 @@ router.delete(`/delete/:id`, (req, res)=>{
                   WHERE movies.id = $1;`;
   pool.query(SQLquery, id)
   .then(result=>{
-    res.send(200);
+    res.sendStatus(200);
   })
   .catch(error=>{
     console.log('ERROR IN /delete/id DELETE film -------------------------------->', error);
@@ -19,7 +19,8 @@ router.delete(`/delete/:id`, (req, res)=>{
 });
 
 // DELETE film/genre pair from junction table
-router.post(`/junction`, (req, res)=>{
+router.delete(`/junction`, (req, res)=>{
+  console.log('in delete genre with:', req.body);
   let id = [req.body.movie_id, req.body.genre_id];
   let SQLquery = `DELETE FROM movie_genre
                   USING movies, genres
@@ -136,6 +137,7 @@ router.post(`/genre`, (req, res)=>{
 
 // POST new film/genre pair to junction table
 router.post(`/junction`, (req, res)=>{
+  console.log('/junction WITH:-------------------', req.body.movie_id, req.body.genre_id);
   let id = [req.body.movie_id, req.body.genre_id];
   let SQLquery = `INSERT INTO movie_genre(movie_id, genre_id)
                   VALUES($1, $2);`;
