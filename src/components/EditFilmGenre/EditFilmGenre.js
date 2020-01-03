@@ -15,6 +15,7 @@ class EditFilmGenre extends Component{
     poster: '',
     description: '',
     genres: '',
+    genre_id: '',
     junction: {
       movie_id: '',
       genre_id: ''
@@ -43,19 +44,29 @@ class EditFilmGenre extends Component{
   }
 
   // Add genre to selected film
-  handleClickAddGenre = () => {
+  handleClickAddGenre = (genre) => {
+    if(this.state.genre_id.includes(genre)){
+      alert(`Genre already tagged`);
+    }
+    else {
     this.props.dispatch({type: `POST_JUNCTION`, payload: this.state.junction});
     this.clearJunctionState();
     this.refreshGenres();
     alert(`Genre added to film!`);
+    }
   }
 
   // Remove genre from selected film
-  handleClickRemoveGenre = () => {
+  handleClickRemoveGenre = (genre) => {
+    if(!this.state.genre_id.includes(genre)){
+      alert(`Genre already removed`);
+    }
+    else {
     this.props.dispatch({type: `DELETE_JUNCTION`, payload: this.state.junction});
     this.clearJunctionState();
     this.refreshGenres();
     alert(`Genre removed from film!`);
+    }
   }
 
   // Set junction state to input value
@@ -76,8 +87,6 @@ class EditFilmGenre extends Component{
   render(){
     return(
       <>
-              {JSON.stringify(this.state)}
-
         <p>film genres</p>
         <p>{this.props.reduxState.map(genre => 
               <span key={genre.genres}>{genre.genres.join(', ')}</span>
@@ -95,13 +104,13 @@ class EditFilmGenre extends Component{
           )}
         </TextField>
 
-        <Fab onClick={()=>this.handleClickRemoveGenre()} color="secondary" aria-label="remove" 
+        <Fab onClick={()=>this.handleClickRemoveGenre(this.state.junction.genre_id)} color="secondary" aria-label="remove" 
           size="small"
           style={{display:"inline-block", marginRight:"20px"}}>
           <CloseIcon />
         </Fab>
 
-        <Fab onClick={()=>this.handleClickAddGenre()} color="primary" aria-label="add" 
+        <Fab onClick={()=>this.handleClickAddGenre(this.state.junction.genre_id)} color="primary" aria-label="add" 
           size="small"
           style={{display:"inline-block", marginRight:"20px"}}>
           <AddIcon />

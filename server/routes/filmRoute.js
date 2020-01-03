@@ -88,7 +88,7 @@ router.get(`/search/:id`, (req, res)=>{
 // GET selected film and genre
 router.get(`/this/:id`, (req, res)=>{
   let id = [req.params.id];
-  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
+  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres, array_agg(genres.id) as genre_id
                   FROM movies
                   LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
                   LEFT JOIN genres ON genres.id = movie_genre.genre_id
