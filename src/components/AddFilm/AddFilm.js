@@ -166,7 +166,7 @@ class AddFilm extends Component{
             value={this.state.genre.name}/>
 
           <Fab onClick={this.handleClickAddGenre} color="primary" aria-label="add">
-            <CheckIcon />
+            <CheckIcon /> 
           </Fab>
         </div>
 
