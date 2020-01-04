@@ -6,19 +6,30 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import TextField from '@material-ui/core/TextField';
+import EditFilmGenre from '../EditFilmGenre/EditFilmGenre';
 
 class EditFilm extends Component{
 
   state = {
-
+    movie_id: '',
+    title: '',
+    poster: '',
+    description: '',
+    genres: ''
   }
 
   componentDidMount(){
     this.props.dispatch({type: `GET_THIS_FILM`, payload: this.props.match.params.id});
-    this.setState(this.props.reduxState[0]); // DOES NOT SET STATE ON REFRESH
+    this.props.dispatch({type: `GET_GENRE`});
   }
 
-  // Return to film list page
+  componentDidUpdate(prevProps){
+    if(this.props.reduxState !== prevProps.reduxState){
+      this.setState(this.props.reduxState[0]);
+    }
+  }
+
+  // Return to main film list page
   goBack = () => {
     this.props.history.push(`/`);
   }
@@ -28,7 +39,7 @@ class EditFilm extends Component{
     this.setState({
       ...this.state,
       [propName]: event.target.value
-    })
+    });
   }
 
   // Open confirmation dialog, if YES delete film and return to main film list page
@@ -41,8 +52,9 @@ class EditFilm extends Component{
   }
 
   // Dispatch state to saga for PUT
-  handleClickSave = () => {
+  handleClickSave = (title) => {
     this.props.dispatch({type: `EDIT_FILM`, payload: this.state});
+    this.props.history.push('/details/'+title);
   }
 
   // Dispatch film ID to saga for DELETE
@@ -53,61 +65,68 @@ class EditFilm extends Component{
 
   render(){
     return(
-      <div>
-        {this.props.reduxState.map((film, i)=>
-          <div key={i}>
+      <>
+        <div className="main-edit-container">
+          {this.props.reduxState.map((film, i)=>
+            <div key={i}>
 
-            <div className="nav-btn-div">
-              <Link to={"/details/"+film.movie_id}>
-                <Fab color="secondary" aria-label="cancel" 
-                  style={{display:"inline-block", marginRight:"20px"}}>
-                  <CloseIcon />
-                </Fab>
-              </Link>
+              <div className="nav-btn-div">
 
-              <Link to={"/"}>
-                <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="secondary" aria-label="delete" 
+                <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="default" aria-label="delete" 
                   style={{display:"inline-block", marginRight:"20px"}}>
                   <DeleteForeverIcon />
                 </Fab>
-              </Link>
 
-              <Link to={"/details/"+film.movie_id}>
-                <Fab onClick={this.handleClickSave} color="primary" aria-label="save" 
+                <Link to={"/details/"+film.title}>
+                  <Fab color="secondary" aria-label="cancel" 
+                    style={{display:"inline-block", marginRight:"20px"}}>
+                    <CloseIcon />
+                  </Fab>
+                </Link>
+
+                <Fab onClick={()=>this.handleClickSave(film.title)} color="primary" aria-label="save" 
                   style={{display:"inline-block", marginRight:"20px"}}>
                   <CheckIcon />
                 </Fab>
-              </Link>
+              </div>
+
+              <h2>Edit Film</h2>
+
+              <div className="input-div-box">
+                <TextField id="standard-basic" 
+                  style={{marginRight:"50px"}}
+                  label="film title"
+                  onChange={(event)=>this.handleChange(event, 'title')}
+                  value={this.state.title || ''}/>
+
+                <TextField id="standard-basic" 
+                  style={{marginRight:"50px"}}
+                  label="film poster"
+                  onChange={(event)=>this.handleChange(event, 'poster')}
+                  value={this.state.poster || ''}/>
+
+                <TextField id="standard-basic" 
+                  style={{marginRight:"50px", width:"300px"}}
+                  label="film description"
+                  onChange={(event)=>this.handleChange(event, 'description')}
+                  value={this.state.description || ''}
+                  rowsMax="4"
+                  multiline/>
+
+                  
+              </div>
             </div>
-
-            <h2>Edit Film</h2>
-
-            <div className="input-div-box">
-              <TextField id="standard-basic" 
-                style={{marginRight:"50px"}}
-                onChange={(event)=>this.handleChange(event, 'title')}
-                value={this.state.title}/>
-
-              <TextField id="standard-basic" 
-                style={{marginRight:"50px"}}
-                onChange={(event)=>this.handleChange(event, 'poster')}
-                value={this.state.poster}/>
-
-              <TextField id="standard-basic" 
-                style={{marginRight:"50px", width:"300px"}}
-                onChange={(event)=>this.handleChange(event, 'description')}
-                value={this.state.description}
-                multiline/>
-            </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+        <EditFilmGenre />
+      </>
     )
   }
 }
 
 const putReduxStateOnProps = (reduxState)=>({
-  reduxState: reduxState.thisFilmReducer
+  reduxState: reduxState.thisFilmReducer,
+  genre: reduxState.genreReducer
 });
 
 export default connect(putReduxStateOnProps)(EditFilm);

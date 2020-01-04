@@ -10,10 +10,26 @@ router.delete(`/delete/:id`, (req, res)=>{
                   WHERE movies.id = $1;`;
   pool.query(SQLquery, id)
   .then(result=>{
-    res.send(200);
+    res.sendStatus(200);
   })
   .catch(error=>{
     console.log('ERROR IN /delete/id DELETE film -------------------------------->', error);
+    res.sendStatus(500);
+  });
+});
+
+// DELETE film/genre pair from junction table
+router.delete(`/junction`, (req, res)=>{
+  let id = [req.body.movie_id, req.body.genre_id];
+  let SQLquery = `DELETE FROM movie_genre
+                  USING movies, genres
+                  WHERE movie_id = $1 AND genre_id = $2;`;
+  pool.query(SQLquery, id)
+  .then(result=>{
+    res.sendStatus(201);
+  })
+  .catch(error=>{
+    console.log('ERROR IN /junction DELETE new junction -------------------------------->', error);
     res.sendStatus(500);
   });
 });
@@ -25,7 +41,7 @@ router.get(`/`, (req, res)=>{
                   LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
                   LEFT JOIN genres ON genres.id = movie_genre.genre_id
                   GROUP BY movies.id
-                  ORDER BY title;`;
+                  ORDER BY lower(title);`;
   pool.query(SQLquery)
   .then(result=>{
     res.send(result.rows);
@@ -38,7 +54,7 @@ router.get(`/`, (req, res)=>{
 
 // GET all genres
 router.get(`/genre`, (req, res)=>{
-  let SQLquery = `SELECT * FROM genres;`;
+  let SQLquery = `SELECT * FROM genres ORDER BY lower(name);`;
   pool.query(SQLquery)
   .then(result=>{
     res.send(result.rows);
@@ -72,11 +88,11 @@ router.get(`/search/:id`, (req, res)=>{
 // GET selected film and genre
 router.get(`/this/:id`, (req, res)=>{
   let id = [req.params.id];
-  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres
+  let SQLquery = `SELECT movies.id as movie_id, movies.title, movies.poster, movies.description, array_agg(genres.name) as genres, array_agg(genres.id) as genre_id
                   FROM movies
                   LEFT JOIN movie_genre ON movies.id = movie_genre.movie_id
                   LEFT JOIN genres ON genres.id = movie_genre.genre_id
-                  WHERE movies.id = $1
+                  WHERE movies.title = $1
                   GROUP BY movies.id;`;
   pool.query(SQLquery, id)
   .then(result=>{
@@ -120,6 +136,7 @@ router.post(`/genre`, (req, res)=>{
 
 // POST new film/genre pair to junction table
 router.post(`/junction`, (req, res)=>{
+  console.log('/junction WITH:-------------------', req.body.movie_id, req.body.genre_id);
   let id = [req.body.movie_id, req.body.genre_id];
   let SQLquery = `INSERT INTO movie_genre(movie_id, genre_id)
                   VALUES($1, $2);`;
@@ -128,7 +145,7 @@ router.post(`/junction`, (req, res)=>{
     res.sendStatus(201);
   })
   .catch(error=>{
-    console.log('ERROR IN /genre POST new junction -------------------------------->', error);
+    console.log('ERROR IN /junction POST new junction -------------------------------->', error);
     res.sendStatus(500);
   });
 });

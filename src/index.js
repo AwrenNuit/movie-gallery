@@ -6,12 +6,13 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 // Provider allows us to use redux within our react app
 import { Provider } from 'react-redux';
-// import logger from 'redux-logger';
+import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 import {takeEvery} from 'redux-saga/effects';
 // Import sagas
 import deleteFilmSaga from './redux/sagas/deleteFilmSaga';
+import deleteJunctionSaga from './redux/sagas/deleteJunctionSaga';
 import editFilmSaga from './redux/sagas/editFilmSaga';
 import getFilmSaga from './redux/sagas/getFilmSaga';
 import getGenreSaga from './redux/sagas/getGenreSaga';
@@ -29,6 +30,7 @@ import searchFilmReducer from './redux/reducers/searchFilmReducer'
 // Create the watcherSaga generator function
 function* watcherSaga() {
     yield takeEvery(`DELETE_FILM`, deleteFilmSaga);
+    yield takeEvery(`DELETE_JUNCTION`, deleteJunctionSaga);
     yield takeEvery(`EDIT_FILM`, editFilmSaga);
     yield takeEvery(`GET_FILM`, getFilmSaga);
     yield takeEvery(`GET_GENRE`, getGenreSaga);
@@ -51,7 +53,7 @@ const storeInstance = createStore(
         searchFilmReducer
     }),
     // Add sagaMiddleware to our store
-    applyMiddleware(sagaMiddleware),
+    applyMiddleware(sagaMiddleware, logger),
 );
 
 // Pass rootSaga into our sagaMiddleware

@@ -145,6 +145,7 @@ class AddFilm extends Component{
             style={{marginRight:"50px", width:"300px"}}
             onChange={(event)=>this.handleFilmChange(event, 'description')}
             value={this.state.film.description}
+            rowsMax="4"
             multiline/>
 
           <Fab onClick={this.handleClickAddFilm} color="primary" aria-label="add">
@@ -165,7 +166,7 @@ class AddFilm extends Component{
             value={this.state.genre.name}/>
 
           <Fab onClick={this.handleClickAddGenre} color="primary" aria-label="add">
-            <CheckIcon />
+            <CheckIcon /> 
           </Fab>
         </div>
 

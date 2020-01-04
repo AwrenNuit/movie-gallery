@@ -5,7 +5,7 @@ import {put} from 'redux-saga/effects';
 function* editFilmSaga(action){
   try{
       yield axios.put(`/film/${action.payload.movie_id}`, action.payload);
-      yield put({type: `GET_THIS_FILM`, payload: action.payload.movie_id});
+      yield put({type: `GET_THIS_FILM`, payload: action.payload.title});
   }
   catch(error){
       console.log('error in PUT film:', error);

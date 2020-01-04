@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
 import SearchIcon from '@material-ui/icons/Search';
 import TextField from '@material-ui/core/TextField';
@@ -20,8 +20,9 @@ class SearchBar extends Component{
   }
 
   // Dispatch state to saga for GET
-  handleClick = () => {
+  handleClick = (search) => {
     this.props.dispatch({type: `SEARCH_FILM`, payload: this.state.search});
+    this.props.history.push('/search='+search);
   }
 
   render(){
@@ -34,18 +35,16 @@ class SearchBar extends Component{
         </Link>
 
         <TextField id="outlined-basic" 
-          label="search" 
+          label="search titles" 
           variant="outlined"
           style={{marginRight:"20px"}}
           className="search-in inputs"
           onChange={(event)=>this.handleChange(event)}
           value={this.state.search}/>
 
-        <Link to={"/results"}>
-          <Fab onClick={this.handleClick} color="primary" aria-label="search">
-            <SearchIcon />
-          </Fab>
-        </Link>
+        <Fab onClick={()=>this.handleClick(this.state.search)} color="primary" aria-label="search">
+          <SearchIcon />
+        </Fab>
       </>
     )
   }
@@ -55,4 +54,4 @@ const putReduxStateOnProps = (reduxState)=>({
   reduxState: reduxState.OBJECT
 });
 
-export default connect(putReduxStateOnProps)(SearchBar);
+export default withRouter(connect(putReduxStateOnProps)(SearchBar));

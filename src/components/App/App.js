@@ -20,7 +20,7 @@ class App extends Component {
           <Route path="/add" component={AddFilm} />
           <Route path="/details/:id" component={ThisFilm} />
           <Route path="/edit/:id" component={EditFilm} />
-          <Route path="/results" component={Search} />
+          <Route path="/search=:id" component={Search} />
         </Router>
       </div>
     );
