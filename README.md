@@ -25,10 +25,9 @@ To see the fully functional site, please visit: https://young-waters-19950.herok
 - Use 'npm run server' and 'npm run client' to run the app
 
 ## Future Plans
-- Allowing /edit page to persist upon page refresh
-- Allowing /add page to update upon film add or genre add
-- Allowing a film's genre to be edited and/or removed
 - Making the delete confirmation look better
+- Troubleshooting the not-quite-100% chance to update /edit page genre on add or remove
+- Troubleshooting the rare case of not loading the selected film on the /details page
 
 Thank you to the everyone at Prime Digital Academy for helping me learn a new skill and for being so supportive.
 
