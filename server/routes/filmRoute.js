@@ -54,7 +54,7 @@ router.get(`/`, (req, res)=>{
 
 // GET all genres
 router.get(`/genre`, (req, res)=>{
-  let SQLquery = `SELECT * FROM genres;`;
+  let SQLquery = `SELECT * FROM genres ORDER BY lower(name);`;
   pool.query(SQLquery)
   .then(result=>{
     res.send(result.rows);

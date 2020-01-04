@@ -65,59 +65,61 @@ class EditFilm extends Component{
 
   render(){
     return(
-      <div>
-        {this.props.reduxState.map((film, i)=>
-          <div key={i}>
+      <>
+        <div className="main-edit-container">
+          {this.props.reduxState.map((film, i)=>
+            <div key={i}>
 
-            <div className="nav-btn-div">
+              <div className="nav-btn-div">
 
-              <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="default" aria-label="delete" 
-                style={{display:"inline-block", marginRight:"20px"}}>
-                <DeleteForeverIcon />
-              </Fab>
-
-              <Link to={"/details/"+film.title}>
-                <Fab color="secondary" aria-label="cancel" 
+                <Fab onClick={()=>this.handleClickDelete(film.movie_id)} color="default" aria-label="delete" 
                   style={{display:"inline-block", marginRight:"20px"}}>
-                  <CloseIcon />
+                  <DeleteForeverIcon />
                 </Fab>
-              </Link>
 
-              <Fab onClick={()=>this.handleClickSave(film.title)} color="primary" aria-label="save" 
-                style={{display:"inline-block", marginRight:"20px"}}>
-                <CheckIcon />
-              </Fab>
-            </div>
+                <Link to={"/details/"+film.title}>
+                  <Fab color="secondary" aria-label="cancel" 
+                    style={{display:"inline-block", marginRight:"20px"}}>
+                    <CloseIcon />
+                  </Fab>
+                </Link>
 
-            <h2>Edit Film</h2>
+                <Fab onClick={()=>this.handleClickSave(film.title)} color="primary" aria-label="save" 
+                  style={{display:"inline-block", marginRight:"20px"}}>
+                  <CheckIcon />
+                </Fab>
+              </div>
 
-            <div className="input-div-box">
-              <TextField id="standard-basic" 
-                style={{marginRight:"50px"}}
-                label="film title"
-                onChange={(event)=>this.handleChange(event, 'title')}
-                value={this.state.title || ''}/>
+              <h2>Edit Film</h2>
 
-              <TextField id="standard-basic" 
-                style={{marginRight:"50px"}}
-                label="film poster"
-                onChange={(event)=>this.handleChange(event, 'poster')}
-                value={this.state.poster || ''}/>
+              <div className="input-div-box">
+                <TextField id="standard-basic" 
+                  style={{marginRight:"50px"}}
+                  label="film title"
+                  onChange={(event)=>this.handleChange(event, 'title')}
+                  value={this.state.title || ''}/>
 
-              <TextField id="standard-basic" 
-                style={{marginRight:"50px", width:"300px"}}
-                label="film description"
-                onChange={(event)=>this.handleChange(event, 'description')}
-                value={this.state.description || ''}
-                multiline/>
+                <TextField id="standard-basic" 
+                  style={{marginRight:"50px"}}
+                  label="film poster"
+                  onChange={(event)=>this.handleChange(event, 'poster')}
+                  value={this.state.poster || ''}/>
 
-              <div>
-                <EditFilmGenre />
+                <TextField id="standard-basic" 
+                  style={{marginRight:"50px", width:"300px"}}
+                  label="film description"
+                  onChange={(event)=>this.handleChange(event, 'description')}
+                  value={this.state.description || ''}
+                  rowsMax="4"
+                  multiline/>
+
+                  
               </div>
             </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+        <EditFilmGenre />
+      </>
     )
   }
 }

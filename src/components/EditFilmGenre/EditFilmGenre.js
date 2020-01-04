@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
-import CloseIcon from '@material-ui/icons/Close';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import AddIcon from '@material-ui/icons/Add';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -89,34 +89,39 @@ class EditFilmGenre extends Component{
   render(){
     return(
       <>
-        <p>film genres</p>
-        <p>{this.props.reduxState.map(genre => 
-              <span key={genre.genres}>{genre.genres.join(', ')}</span>
-          )}</p>
-        <TextField
-          id="standard-select"
-          style={{width: "200px", marginRight:"50px"}}
-          select
-          label="add or remove a genre"
-          value={this.state.junction.genre_id}
-          onChange={(event)=>this.handleJunctionChange(event)}>
+        <h2>Edit Film Genres</h2>
 
-          {this.props.genre.map((genre, i)=>
-            <MenuItem key={i} value={genre.id}>{genre.name}</MenuItem>
-          )}
-        </TextField>
+        <div className="input-div-box">
+          <p>{this.props.reduxState.map(genre => 
+                <span key={genre.genres}>{genre.genres.join(', ')}</span>
+            )}</p>
+          <TextField
+            id="standard-select"
+            style={{width: "200px", marginRight:"50px"}}
+            select
+            label="add or remove a genre"
+            value={this.state.junction.genre_id}
+            onChange={(event)=>this.handleJunctionChange(event)}>
 
-        <Fab onClick={()=>this.handleClickRemoveGenre(this.state.junction.genre_id)} color="secondary" aria-label="remove" 
-          size="small"
-          style={{display:"inline-block", marginRight:"20px"}}>
-          <CloseIcon />
-        </Fab>
+            {this.props.genre.map((genre, i)=>
+              <MenuItem key={i} value={genre.id}>{genre.name}</MenuItem>
+            )}
+          </TextField>
 
-        <Fab onClick={()=>this.handleClickAddGenre(this.state.junction.genre_id)} color="primary" aria-label="add" 
-          size="small"
-          style={{display:"inline-block", marginRight:"20px"}}>
-          <AddIcon />
-        </Fab>
+          <Fab onClick={()=>this.handleClickRemoveGenre(this.state.junction.genre_id)} 
+            color="secondary" aria-label="remove" 
+            size="small"
+            style={{display:"inline-block", marginRight:"20px", position:"relative", top:"10px"}}>
+            <DeleteForeverIcon />
+          </Fab>
+
+          <Fab onClick={()=>this.handleClickAddGenre(this.state.junction.genre_id)} 
+            color="primary" aria-label="add" 
+            size="small"
+            style={{display:"inline-block", marginRight:"20px", position:"relative", top:"10px"}}>
+            <AddIcon />
+          </Fab>
+        </div>
       </>
     )
   }
