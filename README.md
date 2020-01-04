@@ -25,7 +25,7 @@ To see the fully functional site, please visit: https://young-waters-19950.herok
 - Use 'npm run server' and 'npm run client' to run the app
 
 ## Future Plans
-- Making the delete confirmation look better
+- Making the popup dialogs look better
 - Troubleshooting the not-quite-100% chance to update /edit page genre on add or remove
 - Troubleshooting the rare case of not loading the selected film on the /details page
 
